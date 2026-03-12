@@ -16,91 +16,175 @@
         </a>
 
         <div class="nav-links">
-          <a href="index.html" class="active">Главная</a>
-          <a href="blog.html">Блог</a>
+          <a href="index.html">Главная</a>
+          <a href="blog.html" class="active">Блог</a>
         </div>
       </nav>
     </header>
-    <main>
-      <h1>Статьи</h1>
-
-      <section>
-        <h1>Последние статьи</h1>
-
-        <article class="post-card">
-          <h3>Как создать адаптивный дизайн за 30 минут</h3>
-          <p>
-            Опубликовано:
-            <time datetime="2024-12-15 19:00">15 декабря 2024</time>
+    <main class="container">
+      <section class="blog-header split-layout">
+        <div class="split-left">
+          <h1 class="hero-title">Мой блог</h1>
+          <p class="text-muted">
+            Здесь я пишу о ретро-консолях, разработке, железе и, конечно же, о
+            покемонах. Добро пожаловать!
           </p>
-          <p>
-            В этой статье я расскажу о ключевых принципах создания мобильных
-            интерфейсов.
-          </p>
-        </article>
-
-        <article class="post-card">
-          <h3>Как создать адаптивный дизайн за 30 минут</h3>
-          <p>
-            Опубликовано:
-            <time datetime="2024-12-15 19:00">15 декабря 2024</time>
-          </p>
-          <p>
-            В этой статье я расскажу о ключевых принципах создания мобильных
-            интерфейсов.
-          </p>
-        </article>
-
-        <article class="post-card">
-          <h3>Как создать адаптивный дизайн за 30 минут</h3>
-          <p>
-            Опубликовано:
-            <time datetime="2024-12-15 19:00">15 декабря 2024</time>
-          </p>
-          <p>
-            В этой статье я расскажу о ключевых принципах создания мобильных
-            интерфейсов.
-          </p>
-        </article>
-
-        <article class="post-card">
-          <h3>Как создать адаптивный дизайн за 30 минут</h3>
-          <p>
-            Опубликовано:
-            <time datetime="2024-12-15 19:00">15 декабря 2024</time>
-          </p>
-          <p>
-            В этой статье я расскажу о ключевых принципах создания мобильных
-            интерфейсов.
-          </p>
-        </article>
-
-        <article class="post-card">
-          <h3>Как создать адаптивный дизайн за 30 минут</h3>
-          <p>
-            Опубликовано:
-            <time datetime="2024-12-15 19:00">15 декабря 2024</time>
-          </p>
-          <p>
-            В этой статье я расскажу о ключевых принципах создания мобильных
-            интерфейсов.
-          </p>
+        </div>
+        <div class="split-right blog-header-image">
+          <img
+            src="/images/photos/blog-icon.jpg"
+            alt="Мой блог"
+            class="square-avatar"
+          />
+        </div>
+      </section>
+      <section class="featured-post-section">
+        <article class="featured-post">
+          <div class="featured-image">
+            <img src="/images/photos/anbernic.jpg" alt="Anbernic RG35XX H" />
+          </div>
+          <div class="featured-content">
+            <h2 class="featured-title">
+              Настройка Rocknix на Anbernic RG35XX H
+            </h2>
+            <p class="featured-desc">
+              Подробный гайд по установке кастомной прошивки, фиксу проблем со
+              звуком и оптимизации производительности для комфортной игры.
+            </p>
+            <p class="post-date">
+              Опубликовано: <time datetime="2025-10-16">16 октября 2025</time>
+            </p>
+          </div>
         </article>
       </section>
-    </main>
-    <footer>
-      <address>
-        <h2>Контакты</h2>
-        <p>
-          Email:
-          <a href="mailto:hd33433333hd@gmail.com">hd33433333hd@gmail.com</a
-          ><br />
-          Телефон: <a href="tel:+79888888888">+79888888888</a>
-        </p>
 
-        <h3>Социальные сети:</h3>
-        <p>Instagram | Twitter | LinkedIn | GitHub</p>
-      </address>
+      <section class="posts-grid-section">
+        <div class="posts-grid">
+          <article class="grid-post">
+            <img src="/images/photos/donotthecat.jpg" alt="DO NOT THE CAT" />
+            <h3 class="grid-post-title">
+              Что такое IV, EV, как правильно тренировать своего покемона и не
+              сойти с ума.
+            </h3>
+            <p class="post-date">
+              Опубликовано: <time datetime="2025-10-12">12 октября 2025</time>
+            </p>
+          </article>
+
+          <article class="grid-post">
+            <img src="/images/photos/30years.jpg" alt="Pokemon Artwork" />
+            <h3 class="grid-post-title">
+              Подборка фанатских артов на 30-летие Покемонов!
+            </h3>
+            <p class="post-date">
+              Опубликовано: <time datetime="2025-10-08">8 октября 2025</time>
+            </p>
+          </article>
+
+          <article class="grid-post">
+            <img src="/images/photos/newstarters.jpg" alt="Gen 10 starters" />
+            <h3 class="grid-post-title">
+              Gamefreak показали новых стартовых покемонов!
+            </h3>
+            <p class="post-date">
+              Опубликовано: <time datetime="2025-09-29">29 сентября 2025</time>
+            </p>
+          </article>
+
+          <article class="grid-post">
+            <img src="/images/photos/wiiu.png" alt="Nintendo Wii U" />
+            <h3 class="grid-post-title">
+              Как прошить Wii U в 2025 году и не сойти с ума.
+            </h3>
+            <p class="post-date">
+              Опубликовано: <time datetime="2025-09-20">20 сентября 2025</time>
+            </p>
+          </article>
+
+          <article class="grid-post">
+            <img src="/images/photos/bingo.png" alt="Videogames Bingo" />
+            <h3 class="grid-post-title">
+              Разбор моего бинго любимых видеоигр.
+            </h3>
+            <p class="post-date">
+              Опубликовано: <time datetime="2025-09-15">15 сентября 2025</time>
+            </p>
+          </article>
+
+          <article class="grid-post">
+            <img src="/images/photos/zelda.jpg" alt="Zelda" />
+            <h3 class="grid-post-title">
+              Влияние The Legend of Zelda на геймдизайн
+            </h3>
+            <p class="post-date">
+              Опубликовано: <time datetime="2025-09-02">2 сентября 2025</time>
+            </p>
+          </article>
+        </div>
+
+        <div class="pagination">
+          <a href="#" class="btn-outline">Next →</a>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container split-layout">
+        <div class="split-left">
+          <h2 class="footer-title">Say hello and let's<br />work together !</h2>
+
+          <address class="footer-contacts">
+            Email:
+            <a href="mailto:hd33433333hd@gmail.com">hd33433333hd@gmail.com</a
+            ><br />
+            Телефон: <a href="tel:+79999999999">+7 (999) 999-99-99</a>
+          </address>
+
+          <div class="social-icons">
+            <a href="#" aria-label="Telegram">
+              <img
+                src="images/icons/tg.svg"
+                alt="Telegram"
+                class="social-icon-img"
+              />
+            </a>
+            <a href="#" aria-label="GitHub">
+              <img
+                src="images/icons/github.svg"
+                alt="GitHub"
+                class="social-icon-img"
+              />
+            </a>
+          </div>
+
+          <p class="copyright">© 2026 Kogeta, Studentik</p>
+        </div>
+
+        <div class="split-right">
+          <form action="#" class="contact-form">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Your email address"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Input your message</label>
+              <textarea
+                id="message"
+                placeholder="Describe your project"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Submit</button>
+          </form>
+        </div>
+      </div>
     </footer>
     <script src="js/index.js"></script>
   </body>
