@@ -1,207 +1,253 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Главная</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
   </head>
-<body>
+  <body>
     <header class="main-header">
       <nav class="navbar">
-        
         <a href="index.html" class="logo">
-          <img src="arcanine.png">
+          <img src="images/icons/arcanine.png" />
         </a>
 
         <div class="nav-links">
           <a href="index.html" class="active">Главная</a>
           <a href="blog.html">Блог</a>
-          </div>
-        
+        </div>
       </nav>
     </header>
     <main>
+      <section class="hero-section split-layout">
+        <div class="split-left hero-content">
+          <h1 class="hero-title">Добро пожаловать на мой вебсайт!</h1>
+          <p class="hero-desc">
+            Меня зовут Миша, я студент СибГУТИ направления ИВТ. Увлекаюсь вообще
+            много чем, в особенности видеоиграми.
+          </p>
 
-        <section class="hero-section split-layout">
-          
-          <div class="split-left hero-content">
-            <h1 class="hero-title">Добро пожаловать на мой вебсайт!</h1>
-            <p class="hero-desc">Меня зовут Миша, я студент СибГУТИ направления ИВТ. Увлекаюсь вообще много чем, в особенности видеоиграми.</p>
-            
-            <a href="blog.html" class="hero-link">Мои статьи...</a>
+          <a href="blog.html" class="hero-link">Мои статьи...</a>
+        </div>
+
+        <div class="split-right hero-image-container">
+          <img
+            src="images/photos/poke.jpg"
+            alt="Pokemon Sun/Moon starters"
+            class="hero-img"
+          />
+        </div>
+      </section>
+
+      <section class="latest-posts-section container">
+        <h2 class="section-title">Последние статьи</h2>
+        <article class="post-card">
+          <div class="post-content">
+            <span class="post-category">Новинки мира Покемонов</span>
+            <h3 class="post-title">
+              Gamefreak показали новых стартовых покемонов!
+            </h3>
+            <p class="post-desc">
+              Недавно анонсированные Pokemon Winds/Waves принесли нам новых
+              стартовых покемонов, сообщество уже вовсю обсуждает их дизайн.
+            </p>
           </div>
-
-          <div class="split-right hero-image-container">
-            <img src="poke.jpg" alt="Pokemon Sun/Moon starters" class="hero-img">
+          <div class="post-image">
+            <img
+              src="images/photos/newstarters.jpg"
+              alt="Pokemon Gen 10 starters"
+            />
           </div>
+        </article>
 
-        </section>
+        <article class="post-card">
+          <div class="post-content">
+            <span class="post-category">Гайды</span>
+            <h3 class="post-title">
+              Что такое IV, EV, как правильно тренировать своего покемона и не
+              сойти с ума.
+            </h3>
+            <p class="post-desc">
+              В этой статье я расскажу о ключевых механиках игр серии Pokemon,
+              почему покемоны одного уровня могут быть сильнее или слабее и как
+              подготовить свою команду к турниру.
+            </p>
+          </div>
+          <div class="post-image">
+            <img src="images/photos/donotthecat.jpg" alt="DO NOT THE CAT" />
+          </div>
+        </article>
 
-        <section class="latest-posts-section container">
-          <h2 class="section-title">Последние статьи</h2> 
-          <article class="post-card">
-            <div class="post-content">
-              <span class="post-category">Новинки мира Покемонов</span>
-              <h3 class="post-title">Gamefreak показали новых стартовых покемонов!</h3>
-              <p class="post-desc">Недавно анонсированные Pokemon Winds/Waves принесли нам новых стартовых покемонов, сообщество уже вовсю обсуждает их дизайн.</p>
-            </div>
-            <div class="post-image">
-              <img src="newstarters.jpg" alt="Pokemon Gen 10 starters"> 
+        <article class="post-card">
+          <div class="post-content">
+            <span class="post-category">30 лет франшизе Pokemon</span>
+            <h3 class="post-title">
+              Подборка фанатских артов на 30-летие Покемонов!
+            </h3>
+            <p class="post-desc">В этой статье собраны различные арты.</p>
+          </div>
+          <div class="post-image">
+            <img src="images/photos/30years.jpg" alt="Pokemon artwork" />
+          </div>
+        </article>
+
+        <div class="all-posts-link">
+          <a href="blog.html" class="btn-outline">Все статьи</a>
+        </div>
+      </section>
+
+      <section class="skills-section container">
+        <h2 class="section-title">Мои навыки</h2>
+        <ul class="skills-list">
+          <li>Программирование</li>
+          <li>Фотография</li>
+          <li>Веб-тестирование</li>
+          <li>Веб-дизайн</li>
+          <li>Пайка</li>
+          <li>Тренировка Покемонов</li>
+        </ul>
+      </section>
+
+      <section class="resume-section split-layout container">
+        <div class="split-left">
+          <h2 class="section-title">Моя карьера</h2>
+          <p class="text-muted">
+            Пока что я студентик и полноценно не работал, за то учавствовал во
+            множестве интересных инициатив...
+          </p>
+        </div>
+
+        <div class="split-right">
+          <article class="job-item">
+            <img
+              src="images/photos/avrora.jpg"
+              alt="Логотип компании"
+              class="job-icon"
+            />
+
+            <div class="job-details">
+              <span class="job-company">Аврора - (2024 - 2025)</span>
+              <h3 class="job-title">Бета-тестирование</h3>
+              <p class="text-muted">
+                Тестировал новые версии отечественной операционной системы
+                Аврора, вроде прикольно было.
+              </p>
             </div>
           </article>
 
-          <article class="post-card">
-            <div class="post-content">
-              <span class="post-category">Гайды</span>
-              <h3 class="post-title">Что такое IV, EV, как правильно тренировать своего покемона и не сойти с ума.</h3>
-              <p class="post-desc">В этой статье я расскажу о ключевых механиках игр серии Pokemon, почему покемоны одного уровня могут быть сильнее или слабее и как подготовить свою команду к турниру.</p>
-            </div>
-            <div class="post-image">
-              <img src="donotthecat.jpg" alt="">
-            </div>
-          </article>
+          <article class="job-item">
+            <img
+              src="images/photos/vktesters.jpg"
+              alt="Логотип компании"
+              class="job-icon"
+            />
 
-          <article class="post-card">
-            <div class="post-content">
-              <span class="post-category">30 лет франшизе Pokemon</span>
-              <h3 class="post-title">Подборка фанатских артов на 30-летие Покемонов!</h3>
-              <p class="post-desc">В этой статье собраны различные арты.</p>
-            </div>
-            <div class="post-image">
-              <img src="30years.jpg" alt="">
+            <div class="job-details">
+              <span class="job-company">VK Testers - (2024 - 2026)</span>
+              <h3 class="job-title">Веб-тестирование, UI, UX, уязвимости</h3>
+              <p class="text-muted">
+                Прошёл несколько интенсивов и курсов от местных наставников,
+                имею опыт работы с Charles и PostMan.
+              </p>
             </div>
           </article>
 
-          <div class="all-posts-link">
-            <a href="blog.html" class="btn-outline">Все статьи</a>
-          </div>
+          <article class="job-item">
+            <img
+              src="images/photos/eltex.jpg"
+              alt="Логотип компании"
+              class="job-icon"
+            />
 
-        </section>
+            <div class="job-details">
+              <span class="job-company">Академия Eltex - (2026 - 20XX)</span>
+              <h3 class="job-title">Разработка Angular</h3>
+              <p class="text-muted">
+                Причина по которой вы видите данную страницу!
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-        <section class="skills-section container">
-          <h2 class="section-title">Мои навыки</h2> 
-          <ul class="skills-list">
-            <li>Программирование</li>
-            <li>Фотография</li>
-            <li>Веб-тестирование</li>
-            <li>Веб-дизайн</li>
-            <li>Пайка</li>
-            <li>Тренировка Покемонов</li>
-          </ul>
-        </section>
-
-        <section class="resume-section split-layout container">
-          
+      <section class="hobby-section container">
+        <div class="split-layout">
           <div class="split-left">
-            <h2 class="section-title">Моя карьера</h2>
-            <p class="text-muted">Пока что я студентик и полноценно не работал, за то учавствовал во множестве интересных инициатив...</p>
+            <h2 class="section-title">Текущие проекты</h2>
           </div>
-
           <div class="split-right">
-            
-            <article class="job-item">
-              <img src="avrora.jpg" alt="Логотип компании" class="job-icon">
-              
-              <div class="job-details">
-                <span class="job-company">Аврора - (2024 - 2025)</span>
-                <h3 class="job-title">Бета-тестирование</h3>
-                <p class="text-muted">Тестировал новые версии отечественной операционной системы Аврора, вроде прикольно было.</p>
-              </div>
-            </article>
-
-            <article class="job-item">
-              <img src="vktesters.jpg" alt="Логотип компании" class="job-icon">
-              
-              <div class="job-details">
-                <span class="job-company">VK Testers - (2024 - 2026)</span>
-                <h3 class="job-title">Веб-тестирование, UI, UX, уязвимости</h3>
-                <p class="text-muted">Прошёл несколько интенсивов и курсов от местных наставников, имею опыт работы с Charles и PostMan.</p>
-              </div>
-            </article>
-
-            <article class="job-item">
-              <img src="eltex.jpg" alt="Логотип компании" class="job-icon">
-              
-              <div class="job-details">
-                <span class="job-company">Академия Eltex - (2026 - 20XX)</span>
-                <h3 class="job-title">Разработка Angular</h3>
-                <p class="text-muted">Причина по которой вы видите данную страницу!</p>
-              </div>
-            </article>
-
+            <p class="text-muted">
+              На данный момент я занят портированием Pokemon Mystery Dungeon
+              Origins под ARM-Linux портативки, подробнее - в моём блоге.
+            </p>
           </div>
+        </div>
 
-        </section>
-
-        <section class="hobby-section container">
-          
-          <div class="split-layout">
-            <div class="split-left">
-              <h2 class="section-title">Текущие проекты</h2>
-            </div>
-            <div class="split-right">
-              <p class="text-muted">На данный момент я занят портированием Pokemon Mystery Dungeon Origins под ARM-Linux портативки, подробнее - в моём блоге.</p>
+        <div class="hobby-gallery">
+          <div class="gallery-item vertical">
+            <img src="images/photos/pmd.jpg" alt="PMD" />
+            <div class="gallery-overlay">
+              <h3>Pokemon Mystery Dungeon Origins</h3>
+              <p>Немного о самой игре и её коде</p>
             </div>
           </div>
 
-          <div class="hobby-gallery">
-            <div class="gallery-item vertical">
-              <img src="pmd.jpg" alt="PMD">
-              <div class="gallery-overlay">
-                <h3>Pokemon Mystery Dungeon Origins</h3>
-                <p>Немного о самой игре и её коде</p>
-              </div>
-            </div>
-            
-            <div class="gallery-item vertical">
-              <img src="porting.jpg" alt="Портирование">
-              <div class="gallery-overlay">
-                <h3>Linux ARM</h3>
-                <p>Настройка окружения и кросс-компиляция</p>
-              </div>
-            </div>
-            
-            <div class="gallery-item horizontal">
-              <img src="anbernic.jpg" alt="Тесты на консоли">
-              <div class="gallery-overlay">
-                <h3>Тестирование на железе</h3>
-                <p>Запуск и отладка билдов</p>
-              </div>
-            </div>
-            
-            <div class="gallery-item horizontal">
-              <img src="porting.jpg" alt="Код">
-              <div class="gallery-overlay">
-                <h3>Оптимизация</h3>
-                <p>Адаптация управления и оптимизация производительности</p>
-              </div>
+          <div class="gallery-item vertical">
+            <img src="images/photos/porting.jpg" alt="Портирование" />
+            <div class="gallery-overlay">
+              <h3>Linux ARM</h3>
+              <p>Настройка окружения и кросс-компиляция</p>
             </div>
           </div>
-          
-        </section>
 
+          <div class="gallery-item horizontal">
+            <img src="images/photos/anbernic.jpg" alt="Анберник" />
+            <div class="gallery-overlay">
+              <h3>Тестирование на железе</h3>
+              <p>Запуск и отладка билдов</p>
+            </div>
+          </div>
+
+          <div class="gallery-item horizontal">
+            <img src="images/photos/porting.jpg" alt="Портирование" />
+            <div class="gallery-overlay">
+              <h3>Оптимизация</h3>
+              <p>Адаптация управления и оптимизация производительности</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
       <div class="container split-layout">
-        
         <div class="split-left">
-          <h2 class="footer-title">Say hello and let's<br>work together !</h2>
-          
+          <h2 class="footer-title">Say hello and let's<br />work together !</h2>
+
           <address class="footer-contacts">
-            Email: <a href="mailto:hd33433333hd@gmail.com">hd33433333hd@gmail.com</a><br>
+            Email:
+            <a href="mailto:hd33433333hd@gmail.com">hd33433333hd@gmail.com</a
+            ><br />
             Телефон: <a href="tel:+79999999999">+7 (999) 999-99-99</a>
           </address>
 
           <div class="social-icons">
             <a href="#" aria-label="Telegram">
-              <img src="tg.svg" alt="Telegram" class="social-icon-img">
+              <img
+                src="images/icons/tg.svg"
+                alt="Telegram"
+                class="social-icon-img"
+              />
             </a>
             <a href="#" aria-label="GitHub">
-              <img src="github.svg" alt="GitHub" class="social-icon-img">
+              <img
+                src="images/icons/github.svg"
+                alt="GitHub"
+                class="social-icon-img"
+              />
             </a>
           </div>
 
@@ -210,23 +256,31 @@
 
         <div class="split-right">
           <form action="#" class="contact-form">
-            
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" placeholder="Your email address" required>
+              <input
+                type="email"
+                id="email"
+                placeholder="Your email address"
+                required
+              />
             </div>
 
             <div class="form-group">
               <label for="message">Input your message</label>
-              <textarea id="message" placeholder="Describe your project" rows="4" required></textarea>
+              <textarea
+                id="message"
+                placeholder="Describe your project"
+                rows="4"
+                required
+              ></textarea>
             </div>
 
             <button type="submit" class="btn-submit">Submit</button>
           </form>
         </div>
-
       </div>
     </footer>
-    <script src="index.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
