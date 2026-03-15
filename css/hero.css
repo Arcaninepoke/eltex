@@ -1,0 +1,40 @@
+/*-------------------------СТИЛИ ХИРО-------------------------*/
+
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 80px 40px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--bg-dark);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.hero-link {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--accent-primary);
+  transition: all 0.2s ease;
+}
+
+.hero-link:hover {
+  font-weight: 700;
+  color: #000000;
+}
+
+.hero-image-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hero-img {
+  border-radius: 0 0 250px 250px;
+  height: 500px;
+}
