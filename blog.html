@@ -9,6 +9,27 @@
     <link rel="icon" href="./favicon.ico" type="image/x-icon" />
   </head>
   <body>
+    <aside class="admin-panel">
+      <a
+        href="#"
+        id="btn-add-article"
+        class="admin-btn"
+        aria-label="Добавить статью"
+        title="Добавить статью"
+      >
+        <img src="images/icons/article.svg" alt="Добавить" class="admin-icon" />
+      </a>
+
+      <a
+        href="#"
+        id="btn-show-stats"
+        class="admin-btn"
+        aria-label="Статистика"
+        title="Статистика"
+      >
+        <img src="images/icons/admin.svg" alt="Статистика" class="admin-icon" />
+      </a>
+    </aside>
     <header class="main-header">
       <nav class="navbar">
         <a href="index.html" class="logo">
@@ -127,6 +148,41 @@
         </div>
       </section>
     </main>
+
+    <section id="add-article-section" class="add-article-section container">
+      <div class="add-article-wrapper">
+        <h2 class="section-title">Добавить статью</h2>
+
+        <form id="add-article-form" class="admin-form">
+          <div class="form-group-light">
+            <label for="article-title">Заголовок</label>
+            <input
+              type="text"
+              id="article-title"
+              placeholder="Заголовок статьи"
+              required
+            />
+          </div>
+
+          <div class="form-group-light">
+            <label for="article-content">Текст статьи</label>
+            <textarea
+              id="article-content"
+              rows="6"
+              placeholder="Текст статьи"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-solid">Добавить</button>
+            <button type="button" id="btn-cancel" class="btn-outline-light">
+              Отмена
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
     <footer class="site-footer">
       <div class="container split-layout">
         <div class="split-left">
@@ -193,6 +249,30 @@
         </div>
       </div>
     </footer>
+    <div id="stats-modal-overlay" class="modal-overlay is-hidden">
+      <div class="stats-modal">
+        <button
+          id="btn-close-stats"
+          class="btn-close-modal"
+          aria-label="Закрыть"
+        >
+          <img src="images/icons/close.svg" alt="Закрыть" />
+        </button>
+
+        <h2 class="modal-title">Статистика страницы</h2>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">Всего статей:</span>
+            <span class="stat-value" id="total-articles-count">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Комментарии:</span>
+            <span class="stat-value">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="js/index.js"></script>
   </body>
 </html>
