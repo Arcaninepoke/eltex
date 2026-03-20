@@ -124,13 +124,14 @@
     transform 0.2s ease;
 }
 
-.btn-delete-post img {
+.grid-post .btn-delete-post img {
   width: 16px;
   height: 16px;
   background-color: transparent;
   border-radius: 0;
   margin-bottom: 0;
   aspect-ratio: auto;
+  object-fit: contain;
 }
 
 .grid-post:hover .btn-delete-post {
