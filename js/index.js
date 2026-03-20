@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
           `${now.getDate()} ${months[now.getMonth()]} ${year}`;
       const newArticleHTML = `
           <article class="grid-post">
+            <button class="btn-delete-post" aria-label="Удалить статью">
+              <img src="images/icons/close.svg" alt="Удалить">
+            </button>
             <img src="../images/photos/placeholder.jpg" alt="Заглушка" style="background-color: var(--bg-placeholder);">
             <h3 class="grid-post-title">${newTitle}</h3>
             <p class="post-date">Опубликовано: <time datetime="${
@@ -72,6 +75,19 @@ document.addEventListener('DOMContentLoaded', () => {
       addArticleSection.classList.add('is-hidden');
     });
   }
+
+  /* Удаление статьи */
+  postsGrid.addEventListener('click', (event) => {
+    const deleteBtn = event.target.closest('.btn-delete-post');
+    if (deleteBtn) {
+      const postCard = deleteBtn.closest('.grid-post');
+      if (postCard) {
+        postCard.remove();
+        updateStatistics();
+      }
+    }
+  });
+
   /* Открываем и закрываем окошко статистики */
   if (btnShowStats && statsOverlay && btnCloseStats) {
     btnShowStats.addEventListener('click', (event) => {
