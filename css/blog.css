@@ -143,3 +143,16 @@
   transform: scale(1.15);
   background-color: #ffffff;
 }
+
+.empty-msg {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin: 80px 0;
+  display: none;
+}
+
+.empty-msg.is-visible {
+  display: block;
+}
