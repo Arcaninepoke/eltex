@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const postsGrid = document.querySelector('.posts-grid');
   const titleInput = document.getElementById('article-title');
   const logoImg = document.querySelector('.logo img');
+  const emptyMsg = document.getElementById('empty-state-msg');
 
   /* Небольшая пасхалка, покликайте по собаке в левом верхнем углу (да, я помню
    * как работать с апишками, эта моя любимая) */
@@ -39,13 +40,44 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  /* Добавление новой статьи в сетку статей, кидаем ее в начало, генерим html
-   * элемент */
+
   if (postsGrid) {
+    /* Достаем статьи из памяти (или создаем пустой массив) */
+    let articles = JSON.parse(localStorage.getItem('my_blog_articles')) || [];
+
+    /* Функция отрисовки статей на странице */
+    function renderArticles() {
+      postsGrid.innerHTML = '';
+
+      if (articles.length === 0) {
+        if (emptyMsg) emptyMsg.classList.add('is-visible');
+      } else {
+        if (emptyMsg) emptyMsg.classList.remove('is-visible');
+
+        articles.forEach(article => {
+          const articleHTML = `
+            <article class="grid-post" data-id="${article.id}">
+              <button class="btn-delete-post" aria-label="Удалить статью">
+                <img src="images/icons/close.svg" alt="Удалить">
+              </button>
+              <img src="../images/photos/placeholder.jpg" alt="Заглушка" style="background-color: var(--bg-placeholder);">
+              <h3 class="grid-post-title">${article.title}</h3>
+              <p class="post-date">Опубликовано: <time datetime="${
+              article.datetimeStr}">${article.displayDate}</time></p>
+            </article>
+          `;
+          postsGrid.insertAdjacentHTML('beforeend', articleHTML);
+        });
+      }
+      updateStatistics();
+    }
+
+    /* Сохранение новой статьи */
     addArticleForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const newTitle = titleInput.value.trim();
       if (!newTitle) return;
+
       const now = new Date();
       const year = now.getFullYear();
       const monthNum = String(now.getMonth() + 1).padStart(2, '0');
@@ -57,36 +89,38 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
       const displayDateStr =
           `${now.getDate()} ${months[now.getMonth()]} ${year}`;
-      const newArticleHTML = `
-          <article class="grid-post">
-            <button class="btn-delete-post" aria-label="Удалить статью">
-              <img src="images/icons/close.svg" alt="Удалить">
-            </button>
-            <img src="../images/photos/placeholder.jpg" alt="Заглушка" style="background-color: var(--bg-placeholder);">
-            <h3 class="grid-post-title">${newTitle}</h3>
-            <p class="post-date">Опубликовано: <time datetime="${
-          datetimeStr}">${displayDateStr}</time></p>
-          </article>
-        `;
 
-      postsGrid.insertAdjacentHTML('afterbegin', newArticleHTML);
-      updateStatistics();
+      const newArticle = {
+        id: Date.now().toString(),
+        title: newTitle,
+        datetimeStr: datetimeStr,
+        displayDate: displayDateStr
+      };
+
+      articles.unshift(newArticle);
+      localStorage.setItem('my_blog_articles', JSON.stringify(articles));
+
+      renderArticles();
       addArticleForm.reset();
       addArticleSection.classList.add('is-hidden');
     });
-  }
 
-  /* Удаление статьи */
-  postsGrid.addEventListener('click', (event) => {
-    const deleteBtn = event.target.closest('.btn-delete-post');
-    if (deleteBtn) {
-      const postCard = deleteBtn.closest('.grid-post');
-      if (postCard) {
-        postCard.remove();
-        updateStatistics();
+    /* Удаление статьи */
+    postsGrid.addEventListener('click', (event) => {
+      const deleteBtn = event.target.closest('.btn-delete-post');
+      if (deleteBtn) {
+        const postCard = deleteBtn.closest('.grid-post');
+        if (postCard) {
+          const articleId = postCard.getAttribute('data-id');
+          articles = articles.filter(article => article.id !== articleId);
+          localStorage.setItem('my_blog_articles', JSON.stringify(articles));
+          renderArticles();
+        }
       }
-    }
-  });
+    });
+
+    renderArticles();
+  }
 
   /* Открываем и закрываем окошко статистики */
   if (btnShowStats && statsOverlay && btnCloseStats) {
@@ -104,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
   /* Открываем и закрываем форму статьи так же при открывании скроллим до нее */
   if (btnAddArticle && addArticleSection && addArticleForm && btnCancel) {
     addArticleSection.classList.add('is-hidden'); /* 4 пункт */
@@ -123,18 +158,17 @@ document.addEventListener('DOMContentLoaded', () => {
       addArticleForm.reset();
     });
   }
-  /* Функция для обновления статистики (закрепленный большой пост тоже считаем)
-   */
+
+  /* Функция для обновления статистики (теперь просто читает из localStorage) */
   function updateStatistics() {
     const totalArticlesElement =
         document.getElementById('total-articles-count');
-
     if (totalArticlesElement) {
-      const featuredPostsCount =
-          document.querySelectorAll('.featured-post').length;
-      const gridPostsCount = document.querySelectorAll('.grid-post').length;
-      totalArticlesElement.textContent = featuredPostsCount + gridPostsCount;
+      /* Так как featured-post мы (пока что) убрали, просто считаем длину
+       * массива из памяти */
+      const savedArticles =
+          JSON.parse(localStorage.getItem('my_blog_articles')) || [];
+      totalArticlesElement.textContent = savedArticles.length;
     }
   }
-  updateStatistics();
 });
