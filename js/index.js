@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const titleInput = document.getElementById('article-title');
   const logoImg = document.querySelector('.logo img');
   const emptyMsg = document.getElementById('empty-state-msg');
+  const loader = document.getElementById('articles-loader');
 
   /* Небольшая пасхалка, покликайте по собаке в левом верхнем углу (да, я помню
    * как работать с апишками, эта моя любимая) */
@@ -72,37 +73,53 @@ document.addEventListener('DOMContentLoaded', () => {
       updateStatistics();
     }
 
-    /* Сохранение новой статьи */
+    /* Сохранение новой статьи с имитацией задержки и блокировкой */
     addArticleForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const newTitle = titleInput.value.trim();
       if (!newTitle) return;
+      const submitBtn = addArticleForm.querySelector('button[type="submit"]');
+      const allInputs = addArticleForm.querySelectorAll('input, textarea');
 
-      const now = new Date();
-      const year = now.getFullYear();
-      const monthNum = String(now.getMonth() + 1).padStart(2, '0');
-      const dayNum = String(now.getDate()).padStart(2, '0');
-      const datetimeStr = `${year}-${monthNum}-${dayNum}`;
-      const months = [
-        'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля',
-        'августа', 'сентября', 'октября', 'ноября', 'декабря'
-      ];
-      const displayDateStr =
-          `${now.getDate()} ${months[now.getMonth()]} ${year}`;
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.textContent = 'Сохранение...';
 
-      const newArticle = {
-        id: Date.now().toString(),
-        title: newTitle,
-        datetimeStr: datetimeStr,
-        displayDate: displayDateStr
-      };
+      btnCancel.disabled = true;
+      submitBtn.disabled = true;
+      allInputs.forEach(input => input.disabled = true);
 
-      articles.unshift(newArticle);
-      localStorage.setItem('my_blog_articles', JSON.stringify(articles));
+      setTimeout(() => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const monthNum = String(now.getMonth() + 1).padStart(2, '0');
+        const dayNum = String(now.getDate()).padStart(2, '0');
+        const datetimeStr = `${year}-${monthNum}-${dayNum}`;
+        const months = [
+          'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля',
+          'августа', 'сентября', 'октября', 'ноября', 'декабря'
+        ];
+        const displayDateStr =
+            `${now.getDate()} ${months[now.getMonth()]} ${year}`;
 
-      renderArticles();
-      addArticleForm.reset();
-      addArticleSection.classList.add('is-hidden');
+        const newArticle = {
+          id: Date.now().toString(),
+          title: newTitle,
+          datetimeStr: datetimeStr,
+          displayDate: displayDateStr
+        };
+
+        articles.unshift(newArticle);
+        localStorage.setItem('my_blog_articles', JSON.stringify(articles));
+
+        renderArticles();
+
+        submitBtn.textContent = originalBtnText;
+        btnCancel.disabled = false;
+        submitBtn.disabled = false;
+        allInputs.forEach(input => input.disabled = false);
+        addArticleForm.reset();
+        addArticleSection.classList.add('is-hidden');
+      }, 1500);
     });
 
     /* Удаление статьи */
@@ -119,7 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    renderArticles();
+    /* Имитируем загрузку статей */
+    function loadArticlesWithDelay() {
+      if (loader) loader.classList.remove('is-hidden');
+      postsGrid.classList.add('is-hidden');
+      if (emptyMsg) emptyMsg.classList.remove('is-visible');
+      setTimeout(() => {
+        if (loader) loader.classList.add('is-hidden');
+        postsGrid.classList.remove('is-hidden');
+        renderArticles();
+      }, 2500);
+    }
+    loadArticlesWithDelay();
   }
 
   /* Открываем и закрываем окошко статистики */
