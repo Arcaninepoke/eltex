@@ -51,9 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
       postsGrid.innerHTML = '';
 
       if (articles.length === 0) {
-        if (emptyMsg) emptyMsg.classList.add('is-visible');
+        if (emptyMsg) {
+          emptyMsg.classList.add('is-visible');
+        }
       } else {
-        if (emptyMsg) emptyMsg.classList.remove('is-visible');
+        if (emptyMsg) {
+          emptyMsg.classList.remove('is-visible');
+        }
 
         articles.forEach(article => {
           const articleHTML = `
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <button class="btn-delete-post" aria-label="Удалить статью">
                 <img src="images/icons/close.svg" alt="Удалить">
               </button>
-              <img src="../images/photos/placeholder.jpg" alt="Заглушка" style="background-color: var(--bg-placeholder);">
+              <img src="images/photos/placeholder.jpg" alt="Заглушка" style="background-color: var(--bg-placeholder);">
               <h3 class="grid-post-title">${article.title}</h3>
               <p class="post-date">Опубликовано: <time datetime="${
               article.datetimeStr}">${article.displayDate}</time></p>
@@ -77,7 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     addArticleForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const newTitle = titleInput.value.trim();
-      if (!newTitle) return;
+      if (!newTitle) {
+        return;
+      }
       const submitBtn = addArticleForm.querySelector('button[type="submit"]');
       const allInputs = addArticleForm.querySelectorAll('input, textarea');
 
@@ -125,24 +131,28 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Удаление статьи */
     postsGrid.addEventListener('click', (event) => {
       const deleteBtn = event.target.closest('.btn-delete-post');
-      if (deleteBtn) {
-        const postCard = deleteBtn.closest('.grid-post');
-        if (postCard) {
-          const articleId = postCard.getAttribute('data-id');
-          articles = articles.filter(article => article.id !== articleId);
-          localStorage.setItem('my_blog_articles', JSON.stringify(articles));
-          renderArticles();
-        }
+      const postCard = deleteBtn?.closest('.grid-post');
+      if (postCard) {
+        const articleId = postCard.getAttribute('data-id');
+        articles = articles.filter(article => article.id !== articleId);
+        localStorage.setItem('my_blog_articles', JSON.stringify(articles));
+        renderArticles();
       }
     });
 
     /* Имитируем загрузку статей */
     function loadArticlesWithDelay() {
-      if (loader) loader.classList.remove('is-hidden');
+      if (loader) {
+        loader.classList.remove('is-hidden');
+      }
       postsGrid.classList.add('is-hidden');
-      if (emptyMsg) emptyMsg.classList.remove('is-visible');
+      if (emptyMsg) {
+        emptyMsg.classList.remove('is-visible');
+      }
       setTimeout(() => {
-        if (loader) loader.classList.add('is-hidden');
+        if (loader) {
+          loader.classList.add('is-hidden');
+        }
         postsGrid.classList.remove('is-hidden');
         renderArticles();
       }, 2500);
@@ -151,41 +161,37 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* Открываем и закрываем окошко статистики */
-  if (btnShowStats && statsOverlay && btnCloseStats) {
-    btnShowStats.addEventListener('click', (event) => {
-      event.preventDefault();
-      statsOverlay.classList.remove('is-hidden');
-    });
-    btnCloseStats.addEventListener('click', () => {
-      statsOverlay.classList.add('is-hidden');
-    });
+  btnShowStats?.addEventListener('click', (event) => {
+    event.preventDefault();
+    statsOverlay?.classList.remove('is-hidden');
+  });
+  btnCloseStats?.addEventListener('click', () => {
+    statsOverlay?.classList.add('is-hidden');
+  });
 
-    statsOverlay.addEventListener('click', (event) => {
-      if (event.target === statsOverlay) {
-        statsOverlay.classList.add('is-hidden');
-      }
-    });
-  }
+  statsOverlay?.addEventListener('click', (event) => {
+    if (event.target === statsOverlay) {
+      statsOverlay.classList.add('is-hidden');
+    }
+  });
 
   /* Открываем и закрываем форму статьи так же при открывании скроллим до нее */
-  if (btnAddArticle && addArticleSection && addArticleForm && btnCancel) {
-    addArticleSection.classList.add('is-hidden'); /* 4 пункт */
-    btnAddArticle.addEventListener('click', (event) => {
-      event.preventDefault();
-      addArticleSection.classList.toggle('is-hidden');
+  addArticleSection?.classList.add('is-hidden'); /* 4 пункт */
+  btnAddArticle?.addEventListener('click', (event) => {
+    event.preventDefault();
+    addArticleSection?.classList.toggle('is-hidden');
 
-      if (!addArticleSection.classList.contains('is-hidden')) {
-        setTimeout(() => {
-          addArticleSection.scrollIntoView({behavior: 'smooth', block: 'end'});
-        }, 100);
-      }
-    });
+    if (!addArticleSection?.classList.contains('is-hidden')) {
+      setTimeout(() => {
+        addArticleSection?.scrollIntoView({behavior: 'smooth', block: 'end'});
+      }, 100);
+    }
+  });
 
-    btnCancel.addEventListener('click', () => {
-      addArticleSection.classList.add('is-hidden');
-      addArticleForm.reset();
-    });
-  }
+  btnCancel?.addEventListener('click', () => {
+    addArticleSection?.classList.add('is-hidden');
+    addArticleForm?.reset();
+  });
 
   /* Функция для обновления статистики (теперь просто читает из localStorage) */
   function updateStatistics() {
