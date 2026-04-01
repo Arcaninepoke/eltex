@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+
+/*------------------------- ПЕРЕМЕННЫЕ (ЦВЕТА) -------------------------*/
+:root {
+  --text-main: #111827; /* Основной темный текст */
+  --text-muted: #6b7280; /* Второстепенный серый текст */
+  --text-light: #ffffff; /* Белый текст для темных фонов */
+  --text-footer-muted: #d1d5db; /* Светло-серый текст в футере */
+
+  --accent-primary: #4ade80; /* Основной зеленый */
+  --accent-secondary: #22c55e; /* Чуть более темный зеленый для кнопок */
+
+  --bg-dark: #1a1e27; /* Темный фон (футер) */
+  --border-color: #d1d5db; /* Цвет линий и рамок */
+
+  /* Цвета для статей */
+  --bg-card-odd: #fff5f3;
+  --bg-card-even: #f0fdf4;
+  --cat-color-odd: #f97316;
+
+  --bg-placeholder: #e2e4eb; /* Цвет заглушек для картинок */
+  --bg-featured: #f9fafb; /* Светлый фон для главной статьи */
+}
+
+/*-------------------------ОБЩИЕ СТИЛИ И БАЗОВЫЕ ТЕГИ-------------------------*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: var(--text-main);
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+a,
+p,
+li {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+p {
+  margin-bottom: 15px;
+}
+ul {
+  padding-left: 20px;
+}
+section {
+  margin-bottom: 80px;
+}
+
+/* Универсальные классы */
+.container {
+  padding: 0 40px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 40px;
+}
+
+.text-muted {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/*------------------------- АДАПТИВНОСТЬ (ДО 800px) -------------------------*/
+
+@media (max-width: 800px) {
+  .posts-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .featured-post {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-image img {
+    min-height: 250px;
+  }
+
+  .featured-content {
+    padding: 30px 25px;
+  }
+
+  .split-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .blog-header-image {
+    justify-content: flex-start;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+}
