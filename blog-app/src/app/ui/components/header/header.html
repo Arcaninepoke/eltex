@@ -5,8 +5,10 @@
     </a>
 
     <div class="nav-links">
-      <a href="index.html" class="active">Главная</a>
-      <a href="blog.html">Блог</a>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        >Главная</a
+      >
+      <a routerLink="/blog" routerLinkActive="active">Блог</a>
     </div>
   </nav>
 </header>
