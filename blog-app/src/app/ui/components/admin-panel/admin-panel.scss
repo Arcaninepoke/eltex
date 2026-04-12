@@ -1,0 +1,143 @@
+/*------------------------- ПЛАВАЮЩАЯ АДМИН-ПАНЕЛЬ -------------------------*/
+
+.admin-panel {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: var(--text-light);
+  padding: 16px 12px;
+  border-radius: 16px 0 0 16px;
+  box-shadow: -4px 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1000;
+}
+
+.admin-btn {
+  opacity: 0.7;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px; 
+  height: 48px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.admin-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.admin-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/*------------------------- МОДАЛЬНОЕ ОКНО СТАТИСТИКИ -------------------------*/
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(26, 30, 39, 0.6);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.modal-overlay.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.stats-modal {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.is-hidden .stats-modal {
+  transform: translateY(20px);
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  opacity: 0.5;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-close-modal:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.btn-close-modal img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-top: 0;
+  margin-bottom: 24px;
+  padding-right: 24px;
+}
+
+.stats-grid {
+  display: flex;
+  gap: 16px;
+}
+
+.stat-card {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1;
+}
