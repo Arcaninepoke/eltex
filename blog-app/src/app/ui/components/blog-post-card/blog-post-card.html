@@ -1,7 +1,9 @@
 <article class="grid-post">
-  <img src="images/photos/donotthecat.jpg" alt="DO NOT THE CAT" />
+  <img [src]="article.image" [alt]="article.alt" />
   <h3 class="grid-post-title">
-    Что такое IV, EV, как правильно тренировать своего покемона и не сойти с ума.
+    {{ article.title }}
   </h3>
-  <p class="post-date">Опубликовано: <time datetime="2025-10-12">12 октября 2025</time></p>
+  <p class="post-date">
+    Опубликовано: <time [attr.datetime]="article.date">{{ article.displayDate }}</time>
+  </p>
 </article>

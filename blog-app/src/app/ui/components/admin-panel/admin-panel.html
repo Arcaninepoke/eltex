@@ -1,0 +1,44 @@
+<aside class="admin-panel">
+  <button
+    type="button"
+    class="admin-btn"
+    aria-label="Добавить статью"
+    title="Добавить статью"
+    (click)="onAddClick()"
+  >
+    <img src="/images/icons/article.svg" alt="Добавить" class="admin-icon" />
+  </button>
+
+  <button
+    type="button"
+    class="admin-btn"
+    aria-label="Статистика"
+    title="Статистика"
+    (click)="openStats()"
+  >
+    <img src="/images/icons/admin.svg" alt="Статистика" class="admin-icon" />
+  </button>
+</aside>
+
+@if (isStatsModalOpen) {
+  <div class="modal-overlay" (click)="closeStats()">
+    <div class="stats-modal" (click)="$event.stopPropagation()">
+      <button class="btn-close-modal" aria-label="Закрыть" (click)="closeStats()">
+        <img src="/images/icons/close.svg" alt="Закрыть" />
+      </button>
+
+      <h2 class="modal-title">Статистика страницы</h2>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Всего статей:</span>
+          <span class="stat-value">{{ articleCount }}</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Комментарии:</span>
+          <span class="stat-value">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-blog-post-card',
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './blog-post-card.html',
   styleUrl: './blog-post-card.scss',
 })
-export class BlogPostCard {}
+export class BlogPostCard {
+  @Input() article!: any;
+}

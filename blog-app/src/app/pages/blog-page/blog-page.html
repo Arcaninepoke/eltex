@@ -29,12 +29,18 @@
   </section>
   <section class="posts-grid-section">
     <div class="posts-grid">
-      <app-blog-post-card></app-blog-post-card>
-      <app-blog-post-card></app-blog-post-card>
-      <app-blog-post-card></app-blog-post-card>
-      <app-blog-post-card></app-blog-post-card>
-      <app-blog-post-card></app-blog-post-card>
-      <app-blog-post-card></app-blog-post-card>
+      @for (item of articles; track item.id) {
+        <app-blog-post-card [article]="item"></app-blog-post-card>
+      }
     </div>
   </section>
+  <section
+    id="add-article-form-section"
+    class="add-article-section"
+    [class.is-hidden]="!isFormVisible"
+  >
+    <app-article-form></app-article-form>
+  </section>
+
+  <app-admin-panel [articleCount]="articles.length" (addClick)="toggleForm()"> </app-admin-panel>
 </main>
