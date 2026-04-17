@@ -11,6 +11,7 @@ import {BlogPostCard} from '../../ui/components/blog-post-card/blog-post-card';
   styleUrl: './blog-page.scss',
 })
 export class BlogPage {
+  selectedArticle: any = null;
   isFormVisible = false;
 
   toggleForm() {
@@ -21,6 +22,66 @@ export class BlogPage {
         element?.scrollIntoView({behavior: 'smooth'});
       }, 100);
     }
+  }
+
+  onArticleSubmit(formData: any) {
+    if (this.selectedArticle) {
+      const index =
+          this.articles.findIndex(a => a.id === this.selectedArticle.id);
+
+      if (index !== -1) {
+        this.articles[index] = {
+          ...this.articles[index],
+          title: formData.title,
+          content: formData.content
+        };
+      }
+
+    } else {
+      const now = new Date();
+      const year = now.getFullYear();
+      const monthNum = String(now.getMonth() + 1).padStart(2, '0');
+      const dayNum = String(now.getDate()).padStart(2, '0');
+      const datetimeStr = `${year}-${monthNum}-${dayNum}`;
+      const months = [
+        'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля',
+        'августа', 'сентября', 'октября', 'ноября', 'декабря'
+      ];
+      const displayDateStr =
+          `${now.getDate()} ${months[now.getMonth()]} ${year}`;
+
+      const newArticle = {
+        id: Date.now(),
+        title: formData.title,
+        content: formData.content,
+        image: 'images/photos/placeholder.jpg',
+        alt: 'Новая статья',
+        date: datetimeStr,
+        displayDate: displayDateStr
+      };
+
+      this.articles.unshift(newArticle);
+    }
+    this.isFormVisible = false;
+    this.selectedArticle = null;
+  }
+
+  onArticleDelete(articleId: number) {
+    this.articles = this.articles.filter(article => article.id !== articleId);
+    if (this.selectedArticle && this.selectedArticle.id === articleId) {
+      this.isFormVisible = false;
+      this.selectedArticle = null;
+    }
+  }
+
+  onArticleEdit(article: any) {
+    this.selectedArticle = article;
+    this.isFormVisible = true;
+    setTimeout(() => {
+      document.getElementById('add-article-form-section')?.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }, 100);
   }
 
   articles = [

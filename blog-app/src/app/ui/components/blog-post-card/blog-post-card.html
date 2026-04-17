@@ -1,4 +1,13 @@
 <article class="grid-post">
+  <div class="post-actions">
+    <button class="btn-action" title="Редактировать" (click)="onEdit()">
+      <img src="images/icons/edit.svg" alt="Редактировать" />
+    </button>
+    <button class="btn-action" title="Удалить" (click)="onDelete()">
+      <img src="images/icons/close.svg" alt="Удалить" />
+    </button>
+  </div>
+
   <img [src]="article.image" [alt]="article.alt" />
   <h3 class="grid-post-title">
     {{ article.title }}
