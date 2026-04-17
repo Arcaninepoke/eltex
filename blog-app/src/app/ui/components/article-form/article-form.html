@@ -1,22 +1,49 @@
-<section id="add-article-section" class="add-article-section">
-  <div class="add-article-wrapper">
-    <h2 class="section-title">Добавить статью</h2>
+<div class="add-article-wrapper">
+  <h2 class="section-title" style="margin-bottom: 24px">
+    {{ editData ? 'Изменить статью' : 'Создание статьи' }}
+  </h2>
 
-    <form id="add-article-form" class="admin-form">
-      <div class="form-group-light">
-        <label for="article-title">Заголовок</label>
-        <input type="text" id="article-title" placeholder="Заголовок статьи" required />
-      </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="admin-form">
+    <div class="form-group-light">
+      <label for="article-title">Заголовок (минимум 25 символов)*</label>
+      <input
+        id="article-title"
+        type="text"
+        formControlName="title"
+        placeholder="Введите заголовок..."
+        [class.input-error]="form.controls.title.invalid && form.controls.title.touched"
+      />
+      @if (form.controls.title.invalid && form.controls.title.touched) {
+        @if (form.controls.title.errors?.['required']) {
+          <span class="error-text">Заголовок обязателен</span>
+        }
+        @if (form.controls.title.errors?.['minlength']) {
+          <span class="error-text">
+            Нужно еще {{ 25 - form.controls.title.errors?.['minlength'].actualLength }} символов
+          </span>
+        }
+      }
+    </div>
 
-      <div class="form-group-light">
-        <label for="article-content">Текст статьи</label>
-        <textarea id="article-content" rows="6" placeholder="Текст статьи" required></textarea>
-      </div>
+    <div class="form-group-light">
+      <label for="article-text">Текст статьи*</label>
+      <textarea
+        id="article-text"
+        formControlName="content"
+        rows="5"
+        placeholder="О чем хотите рассказать?"
+        [class.input-error]="form.controls.content.invalid && form.controls.content.touched"
+      ></textarea>
+      @if (form.controls.content.invalid && form.controls.content.touched) {
+        <span class="error-text">Текст статьи обязателен</span>
+      }
+    </div>
 
-      <div class="form-actions">
-        <button type="submit" class="btn-solid">Добавить</button>
-        <button type="button" id="btn-cancel" class="btn-outline-light">Отмена</button>
-      </div>
-    </form>
-  </div>
-</section>
+    <div class="form-actions">
+      <button type="submit" class="btn-solid" [disabled]="form.invalid">
+        {{ editData ? 'Сохранить' : 'Добавить' }}
+      </button>
+      <button type="button" class="btn-outline-light" (click)="onCancel()">Отмена</button>
+    </div>
+  </form>
+</div>
