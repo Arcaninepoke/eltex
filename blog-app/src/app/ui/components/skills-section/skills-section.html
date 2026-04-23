@@ -1,0 +1,8 @@
+<section class="skills-section container">
+  <h2 class="section-title">Мои навыки</h2>
+  <ul class="skills-list">
+    @for (skill of skills; track skill) {
+      <li>{{ skill.skill }}</li>
+    }
+  </ul>
+</section>

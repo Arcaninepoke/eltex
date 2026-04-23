@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 
+import {Article} from '../../types/article.interface';
 import {AdminPanel} from '../../ui/components/admin-panel/admin-panel';
 import {ArticleForm} from '../../ui/components/article-form/article-form';
 import {BlogPostCard} from '../../ui/components/blog-post-card/blog-post-card';
@@ -11,7 +12,7 @@ import {BlogPostCard} from '../../ui/components/blog-post-card/blog-post-card';
   styleUrl: './blog-page.scss',
 })
 export class BlogPage {
-  selectedArticle: any = null;
+  selectedArticle: Article|null = null;
   isFormVisible = false;
 
   toggleForm() {
@@ -24,10 +25,10 @@ export class BlogPage {
     }
   }
 
-  onArticleSubmit(formData: any) {
+  onArticleSubmit(formData: {title: string, content: string}) {
     if (this.selectedArticle) {
       const index =
-          this.articles.findIndex(a => a.id === this.selectedArticle.id);
+          this.articles.findIndex(a => a.id === this.selectedArticle?.id);
 
       if (index !== -1) {
         this.articles[index] = {
@@ -74,7 +75,7 @@ export class BlogPage {
     }
   }
 
-  onArticleEdit(article: any) {
+  onArticleEdit(article: Article) {
     this.selectedArticle = article;
     this.isFormVisible = true;
     setTimeout(() => {
@@ -84,7 +85,7 @@ export class BlogPage {
     }, 100);
   }
 
-  articles = [
+  articles: Article[] = [
     {
       id: 1,
       title: 'Как тренировать своего покемона и не сойти с ума',

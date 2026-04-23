@@ -1,0 +1,23 @@
+<section class="resume-section split-layout container">
+  <div class="split-left">
+    <h2 class="section-title">Моя карьера</h2>
+    <p class="text-muted">
+      Пока что я студентик и полноценно не работал, за то учавствовал во множестве интересных
+      инициатив...
+    </p>
+  </div>
+
+  <div class="split-right">
+    @for (job of jobs; track job.company) {
+      <article class="job-item">
+        <img [src]="job.icon" alt="Логотип компании" class="job-icon" />
+
+        <div class="job-details">
+          <span class="job-company">{{ job.company }}</span>
+          <h3 class="job-title">{{ job.title }}</h3>
+          <p class="text-muted">{{ job.desc }}</p>
+        </div>
+      </article>
+    }
+  </div>
+</section>
