@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
+import {Article} from '../../../types/article.interface';
+
 @Component({
   selector: 'app-blog-post-card',
   imports: [],
@@ -7,10 +9,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrl: './blog-post-card.scss',
 })
 export class BlogPostCard {
-  @Input() article!: any;
+  @Input() article!: Article;
 
   @Output() deleteClick = new EventEmitter<number>();
-  @Output() editClick = new EventEmitter<any>();
+  @Output() editClick = new EventEmitter<Article>();
 
   onDelete() {
     this.deleteClick.emit(this.article.id);
