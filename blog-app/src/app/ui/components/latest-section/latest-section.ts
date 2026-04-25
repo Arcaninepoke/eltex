@@ -1,50 +1,32 @@
-import {Component} from '@angular/core';
+import {AsyncPipe} from '@angular/common';
+import {Component, Inject, OnInit} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
+import {ArticlesServiceInterface} from '../../../services/articles/articles-service.interface';
+import {ARTICLE_SERVICE_TOKEN} from '../../../services/articles/articles-service.token';
+import {ArticlesStoreService} from '../../../services/articles/articles-store.service';
 import {Article} from '../../../types/article.interface';
 
 @Component({
   selector: 'app-latest-section',
-  imports: [],
+  imports: [AsyncPipe, RouterLink],
   templateUrl: './latest-section.html',
   styleUrl: './latest-section.scss',
 })
-export class LatestSection {
-  articles: Article[] = [
-    {
-      id: 1,
-      title: 'Как тренировать своего покемона и не сойти с ума',
-      content: 'Блах-блах-блах',
-      date: '2025-04-04',
-      displayDate: '4 Апреля 2025',
-      image: 'images/photos/donotthecat.jpg',
-      alt: 'Do not the cat'
-    },
-    {
-      id: 2,
-      title: 'Как писать статьи и не сойти с ума',
-      content: 'Блах-блах-блах 2',
-      date: '2025-04-05',
-      displayDate: '5 Апреля 2025',
-      image: 'images/photos/poke.jpg',
-      alt: 'Do not the cat'
-    },
-    {
-      id: 3,
-      title: 'Как делать гитхаб пейджес и не сойти с ума',
-      content: 'Блах-блах-блах 3',
-      date: '2025-04-06',
-      displayDate: '6 Апреля 2025',
-      image: 'images/photos/zelda.jpg',
-      alt: 'Do not the cat'
-    },
-    {
-      id: 4,
-      title: 'Как делать компоненты и не сойти с ума',
-      content: 'Блах-блах-блах 4',
-      date: '2025-04-07',
-      displayDate: '7 Апреля 2025',
-      image: 'images/photos/pmd.jpg',
-      alt: 'Do not the cat'
-    }
-  ]
+export class LatestSection implements OnInit {
+  latestArticles$: Observable<Article[]>;
+
+  constructor(
+      private store: ArticlesStoreService,
+      @Inject(ARTICLE_SERVICE_TOKEN) private articlesService:
+          ArticlesServiceInterface) {
+    this.latestArticles$ =
+        this.store.articles$.pipe(map(articles => articles.slice(0, 2)));
+  }
+
+  ngOnInit(): void {
+    this.articlesService.getArticles(2).subscribe();
+  }
 }
