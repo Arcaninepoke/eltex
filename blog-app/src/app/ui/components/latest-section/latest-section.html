@@ -1,20 +1,26 @@
-<section class="latest-posts-section container">
-  <h2 class="section-title">Последние статьи</h2>
+@if (latestArticles$ | async; as articles) {
+  @if (articles.length > 0) {
+    <section class="latest-posts-section container">
+      <h2 class="section-title">Последние статьи</h2>
 
-  @for (article of articles; track article.id) {
-    <article class="post-card">
-      <div class="post-content">
-        <span class="post-category">(Категории будут добавлены позже)</span>
-        <h3 class="post-title">{{ article.title }}</h3>
-        <p class="post-desc">{{ article.content }}</p>
+      <div class="posts-grid">
+        @for (article of articles; track article.id) {
+          <article class="post-card">
+            <div class="post-content">
+              <span class="post-category">(Категории будут добавлены позже)</span>
+              <h3 class="post-title">{{ article.title }}</h3>
+              <p class="post-desc">{{ article.content }}</p>
+            </div>
+            <div class="post-image">
+              <img [src]="article.image" [alt]="article.alt" />
+            </div>
+          </article>
+        }
       </div>
-      <div class="post-image">
-        <img [src]="article.image" [alt]="article.alt" />
+
+      <div class="all-posts-link">
+        <a routerLink="/blog" routerLinkActive="active" class="btn-outline">Все статьи</a>
       </div>
-    </article>
+    </section>
   }
-
-  <div class="all-posts-link">
-    <a href="blog.html" class="btn-outline">Все статьи</a>
-  </div>
-</section>
+}

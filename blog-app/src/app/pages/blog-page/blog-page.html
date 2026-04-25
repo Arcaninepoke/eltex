@@ -29,7 +29,7 @@
   </section>
   <section class="posts-grid-section">
     <div class="posts-grid">
-      @for (item of articles; track item.id) {
+      @for (item of articles$ | async; track item.id) {
         <app-blog-post-card
           [article]="item"
           (deleteClick)="onArticleDelete($event)"
@@ -38,17 +38,27 @@
         </app-blog-post-card>
       }
     </div>
-  </section>
 
+    @if ((totalArticles$ | async)! > store.limit) {
+      <div style="text-align: center; margin-top: 40px">
+        <button class="btn-outline-light" (click)="loadMore()">
+          Показать еще ({{ (totalArticles$ | async)! - store.limit }})
+        </button>
+      </div>
+    }
+  </section>
   @if (isFormVisible) {
     <section id="add-article-form-section" class="add-article-section">
       <app-article-form
         [editData]="selectedArticle"
         (articleSubmit)="onArticleSubmit($event)"
-        (cancel)="isFormVisible = false; selectedArticle = null"
+        (cancel)="closeForm()"
       ></app-article-form>
     </section>
   }
 
-  <app-admin-panel [articleCount]="articles.length" (addClick)="toggleForm()"> </app-admin-panel>
+  <app-admin-panel
+    [articleCount]="(totalArticles$ | async)!"
+    (addClick)="openAddForm()"
+  ></app-admin-panel>
 </main>

@@ -1,47 +1,46 @@
 <div class="add-article-wrapper">
   <h2 class="section-title" style="margin-bottom: 24px">
-    {{ editData ? 'Изменить статью' : 'Создание статьи' }}
+    {{ formTitle() }}
   </h2>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="admin-form">
     <div class="form-group-light">
+      @let isTitleInvalid = hasError('title');
+
       <label for="article-title">Заголовок (минимум 25 символов)*</label>
       <input
         id="article-title"
         type="text"
         formControlName="title"
         placeholder="Введите заголовок..."
-        [class.input-error]="form.controls.title.invalid && form.controls.title.touched"
+        [class.input-error]="isTitleInvalid"
       />
-      @if (form.controls.title.invalid && form.controls.title.touched) {
-        @if (form.controls.title.errors?.['required']) {
-          <span class="error-text">Заголовок обязателен</span>
-        }
-        @if (form.controls.title.errors?.['minlength']) {
-          <span class="error-text">
-            Нужно еще {{ 25 - form.controls.title.errors?.['minlength'].actualLength }} символов
-          </span>
-        }
+
+      @if (isTitleInvalid) {
+        <span class="error-text">{{ getControlError('title') }}</span>
       }
     </div>
 
     <div class="form-group-light">
+      @let isContentInvalid = hasError('content');
+
       <label for="article-text">Текст статьи*</label>
       <textarea
         id="article-text"
         formControlName="content"
         rows="5"
         placeholder="О чем хотите рассказать?"
-        [class.input-error]="form.controls.content.invalid && form.controls.content.touched"
+        [class.input-error]="isContentInvalid"
       ></textarea>
-      @if (form.controls.content.invalid && form.controls.content.touched) {
-        <span class="error-text">Текст статьи обязателен</span>
+
+      @if (isContentInvalid) {
+        <span class="error-text">{{ getControlError('content') }}</span>
       }
     </div>
 
     <div class="form-actions">
       <button type="submit" class="btn-solid" [disabled]="form.invalid">
-        {{ editData ? 'Сохранить' : 'Добавить' }}
+        {{ saveButtonTitle() }}
       </button>
       <button type="button" class="btn-outline-light" (click)="onCancel()">Отмена</button>
     </div>
