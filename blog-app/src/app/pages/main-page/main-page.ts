@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
 import {CareerSection} from '../../ui/components/career-section/career-section';
 import {HeroSection} from '../../ui/components/hero-section/hero-section';
@@ -14,4 +15,9 @@ import {SkillsSection} from '../../ui/components/skills-section/skills-section';
   styleUrl: './main-page.scss',
 })
 export class MainPage {
+  constructor(private titleService: Title) {}
+
+  ngOnInit() {
+    this.titleService.setTitle('Главная');
+  }
 }

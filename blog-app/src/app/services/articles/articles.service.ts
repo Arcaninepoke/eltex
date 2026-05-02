@@ -2,24 +2,23 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {delay, tap} from 'rxjs/operators';
 
+import {STORAGE_KEYS} from '../../constants';
 import {Article} from '../../types/article.interface';
 
 import {ArticlesResponse, ArticlesServiceInterface} from './articles-service.interface';
 import {ArticlesStoreService} from './articles-store.service';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class ArticlesService implements ArticlesServiceInterface {
-  private readonly STORAGE_KEY = 'my_blog_articles';
-
   constructor(private store: ArticlesStoreService) {}
 
   private getAllFromStorage(): Article[] {
-    const data = localStorage.getItem(this.STORAGE_KEY);
+    const data = localStorage.getItem(STORAGE_KEYS.ARTICLES);
     return data ? JSON.parse(data) : [];
   }
 
   private saveToStorage(articles: Article[]): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(articles));
+    localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(articles));
   }
 
   private createResponse(limit: number): ArticlesResponse {

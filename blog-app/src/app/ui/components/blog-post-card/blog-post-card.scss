@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  &:hover .post-actions {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .grid-post img {
@@ -28,50 +32,49 @@
   margin: 0;
 }
 
+.post-title-link {
+  text-decoration: none;
+}
+
 /* --- КНОПКИ ДЕЙСТВИЙ (ПОЯВЛЯЮТСЯ ПРИ НАВЕДЕНИИ) --- */
 .post-actions {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
   display: flex;
   gap: 8px;
-  z-index: 10;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-}
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  
+  .action-btn {
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    padding: 6px;
 
-.grid-post:hover .post-actions {
-  opacity: 1;
-  visibility: visible;
-}
+    ::ng-deep .mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+    }
 
-.btn-action {
-  border: none;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, background-color 0.2s ease;
-
-img {
-    width: 16px;
-    height: 16px;
-    object-fit: contain;
-    margin: 0; 
-    aspect-ratio: auto;
-    border-radius: 0;
-    background-color: transparent;
-    display: block;
+    &:hover {
+      transform: scale(1.15);
+    }
   }
 
-  &:hover {
-    transform: scale(1.15);
-    background-color: #f3f4f6;
+  .edit-btn:hover {
+    color: #42a5f5; 
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .delete-btn:hover {
+    color: #ef5350; 
+    background: rgba(0, 0, 0, 0.8);
   }
 }
