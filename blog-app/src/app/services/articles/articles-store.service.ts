@@ -9,7 +9,8 @@ export class ArticlesStoreService {
   private totalArticlesSubject = new BehaviorSubject<number>(0);
   private limitSubject = new BehaviorSubject<number>(6);
 
-  public articles$: Observable<Article[]> = this.articlesSubject.asObservable();
+  public readonly articles$: Observable<Article[]> =
+      this.articlesSubject.asObservable();
   public totalArticles$: Observable<number> =
       this.totalArticlesSubject.asObservable();
   public limit$: Observable<number> = this.limitSubject.asObservable();

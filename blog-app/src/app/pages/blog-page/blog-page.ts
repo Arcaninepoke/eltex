@@ -1,5 +1,6 @@
 import {AsyncPipe} from '@angular/common';
 import {Component, Inject, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 
 import {ArticlesServiceInterface} from '../../services/articles/articles-service.interface';
@@ -26,13 +27,14 @@ export class BlogPage implements OnInit {
   constructor(
       public store: ArticlesStoreService,
       @Inject(ARTICLE_SERVICE_TOKEN) private articlesService:
-          ArticlesServiceInterface) {
+          ArticlesServiceInterface, private titleService: Title) {
     this.articles$ = this.store.articles$;
     this.totalArticles$ = this.store.totalArticles$;
   }
 
   ngOnInit() {
     this.loadArticles();
+    this.titleService.setTitle('Блог');
   }
 
   private loadArticles() {

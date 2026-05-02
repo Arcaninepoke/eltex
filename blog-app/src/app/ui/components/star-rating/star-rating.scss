@@ -1,0 +1,17 @@
+.stars-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.star-icon {
+  cursor: pointer;
+  color: #ffca28;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.15s ease-in-out;
+  &:hover {
+    transform: scale(1.15);
+  }
+}

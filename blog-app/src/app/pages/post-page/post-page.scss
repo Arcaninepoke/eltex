@@ -1,0 +1,111 @@
+/* Основные стили статьи */
+.post-container {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.post-header {
+  margin-bottom: 32px;
+}
+
+.post-title {
+  margin-bottom: 12px;
+  font-size: 2.2rem;
+  line-height: 1.2;
+}
+
+.post-meta {
+  color: #888;
+  font-size: 0.95rem;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.post-image-wrapper {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 600px;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.post-content {
+  line-height: 1.8;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  white-space: pre-wrap;
+  
+  p {
+    margin-bottom: 20px;
+  }
+}
+
+.loading-screen {
+  text-align: center;
+  padding: 100px 20px;
+  
+  h2 {
+    opacity: 0.7;
+    font-weight: 500;
+  }
+}
+
+/* Секция комментариев */
+.comments-section {
+  margin-top: 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 40px;
+}
+
+.comments-title {
+  margin-bottom: 24px;
+}
+
+.no-comments {
+  color: #888;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+/* Стили для Material Card */
+.comment-card {  
+  .comment-header {
+    margin-bottom: 8px;
+  }
+
+  .comment-author {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .comment-text {
+    margin: 0;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+
+  .comment-footer {
+    padding: 16px 16px 16px;
+    color: #ffca28;
+    font-size: 0.9rem;
+  }
+}
+
+/* Форма комментариев */
+.comment-form-component {
+  display: block;
+}

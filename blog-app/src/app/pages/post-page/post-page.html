@@ -1,0 +1,84 @@
+<div class="container post-container">
+  @if (post$ | async; as post) {
+    <article class="full-post">
+      <header class="post-header">
+        <h1 class="post-title">{{ post.title }}</h1>
+
+        <div class="post-meta">
+          <span
+            >Опубликовано: <time [attr.datetime]="post.date">{{ post.displayDate }}</time></span
+          >
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span>Оценка читателей:</span>
+            <app-star-rating
+              [rating]="post.rating || 0"
+              (ratingChange)="onArticleRatingChange($event)"
+            >
+            </app-star-rating>
+          </div>
+        </div>
+      </header>
+
+      <div class="post-image-wrapper">
+        <img [src]="post.image" [alt]="post.alt" class="post-image" />
+      </div>
+
+      <div class="post-content">
+        <p>{{ post.content }}</p>
+      </div>
+
+      <!-- СЕКЦИЯ КОММЕНТАРИЕВ -->
+      <section class="comments-section">
+        <h2 class="comments-title">Комментарии</h2>
+
+        @if (comments$ | async; as comments) {
+          @if (comments.length === 0) {
+            <p class="no-comments">Пока нет комментариев. Будьте первым!</p>
+          } @else {
+            <div class="comments-list">
+              @for (comment of comments; track comment.id) {
+                <mat-card appearance="outlined" class="comment-card">
+                  <mat-card-header class="comment-header">
+                    <mat-card-title class="comment-author">
+                      {{ comment.author }}
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                      {{ comment.date }}
+                    </mat-card-subtitle>
+                  </mat-card-header>
+
+                  <mat-card-content>
+                    <p class="comment-text">{{ comment.text }}</p>
+                  </mat-card-content>
+
+                  <!-- Футер карточки -->
+                  <mat-card-footer
+                    class="comment-footer"
+                    style="display: flex; align-items: center; justify-content: space-between"
+                  >
+                    <span>Оцените комментарий:</span>
+                    <app-star-rating
+                      [rating]="comment.rating || 0"
+                      (ratingChange)="onCommentRatingChange(comment.id, $event)"
+                    >
+                    </app-star-rating>
+                  </mat-card-footer>
+                </mat-card>
+              }
+            </div>
+          }
+        }
+
+        <!-- Форма добавления -->
+        <app-comment-form
+          class="comment-form-component"
+          (commentSubmit)="onCommentSubmit($event)"
+        ></app-comment-form>
+      </section>
+    </article>
+  } @else {
+    <div class="loading-screen">
+      <h2>Загрузка статьи...</h2>
+    </div>
+  }
+</div>

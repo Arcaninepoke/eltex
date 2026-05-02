@@ -1,18 +1,28 @@
 <article class="grid-post">
+  <!-- Блок с кнопками действий -->
   <div class="post-actions">
-    <button class="btn-action" title="Редактировать" (click)="onEdit()">
-      <img src="images/icons/edit.svg" alt="Редактировать" />
+    <button mat-icon-button class="action-btn edit-btn" title="Редактировать" (click)="onEdit()">
+      <mat-icon>edit</mat-icon>
     </button>
-    <button class="btn-action" title="Удалить" (click)="onDelete()">
-      <img src="images/icons/close.svg" alt="Удалить" />
+    <button mat-icon-button class="action-btn delete-btn" title="Удалить" (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
     </button>
   </div>
 
-  <img [src]="article.image" [alt]="article.alt" />
-  <h3 class="grid-post-title">
-    {{ article.title }}
-  </h3>
+  <!-- Картинка -->
+  <a [routerLink]="['/blog', article().id]">
+    <img [src]="article().image" [alt]="article().alt" />
+  </a>
+
+  <!-- Заголовок -->
+  <a [routerLink]="['/blog', article().id]" class="post-title-link">
+    <h3 class="grid-post-title">
+      {{ article().title }}
+    </h3>
+  </a>
+
+  <!-- Дата публикации -->
   <p class="post-date">
-    Опубликовано: <time [attr.datetime]="article.date">{{ article.displayDate }}</time>
+    Опубликовано: <time [attr.datetime]="article().date">{{ article().displayDate }}</time>
   </p>
 </article>

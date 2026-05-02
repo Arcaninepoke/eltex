@@ -1,0 +1,41 @@
+<div
+  class="comment-form-wrapper"
+  style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0"
+>
+  <h3 style="margin-bottom: 20px">Оставить комментарий</h3>
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    style="display: flex; flex-direction: column; gap: 16px"
+  >
+    <!-- Material поле Имя -->
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Ваше имя</mat-label>
+      <input matInput formControlName="author" placeholder="Как к вам обращаться?" />
+      @if (hasError('author')) {
+        <mat-error>{{ getControlError('author') }}</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Material поле Текст -->
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Комментарий</mat-label>
+      <textarea
+        matInput
+        formControlName="text"
+        rows="4"
+        placeholder="Что вы думаете об этом?"
+      ></textarea>
+      @if (hasError('text')) {
+        <mat-error>{{ getControlError('text') }}</mat-error>
+      }
+    </mat-form-field>
+
+    <div>
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+        Отправить
+      </button>
+    </div>
+  </form>
+</div>

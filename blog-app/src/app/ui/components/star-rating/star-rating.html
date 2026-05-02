@@ -1,0 +1,12 @@
+<div class="stars-wrapper">
+  @for (star of stars; track $index) {
+    <mat-icon
+      class="star-icon"
+      (click)="rate($index + 1)"
+      (mouseenter)="hoverState = $index + 1"
+      (mouseleave)="hoverState = 0"
+    >
+      {{ getIcon($index + 1) }}
+    </mat-icon>
+  }
+</div>

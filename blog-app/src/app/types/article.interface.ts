@@ -6,4 +6,5 @@ export interface Article {
   displayDate: string;
   image: string;
   alt: string;
+  rating?: number;
 }
