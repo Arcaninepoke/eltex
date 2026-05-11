@@ -1,8 +1,10 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+
+import {CommentFormData} from '../../../types/comment-form-data.interface';
 
 @Component({
   selector: 'app-comment-form',
@@ -13,8 +15,7 @@ import {MatInputModule} from '@angular/material/input';
   styleUrl: './comment-form.scss',
 })
 export class CommentForm {
-  @Output()
-  public commentSubmit = new EventEmitter<{author: string; text: string}>();
+  public commentSubmit = output<CommentFormData>();
 
   protected form = new FormGroup({
     author: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -51,10 +52,7 @@ export class CommentForm {
 
   protected onSubmit() {
     if (this.form.invalid) return;
-    this.commentSubmit.emit(this.form.value as {
-      author: string;
-      text: string
-    });
+    this.commentSubmit.emit(this.form.value as CommentFormData);
     this.form.reset();
   }
 }

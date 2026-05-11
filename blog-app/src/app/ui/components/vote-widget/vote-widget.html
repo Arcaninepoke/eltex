@@ -1,0 +1,13 @@
+<div class="vote-container" [class.small-size]="size() === 'small'">
+  <button mat-icon-button class="vote-btn upvote" (click)="onVote(1)" title="Нравится">
+    <mat-icon>keyboard_arrow_up</mat-icon>
+  </button>
+
+  <span class="rating-value" [class.positive]="rating() > 0" [class.negative]="rating() < 0">
+    {{ rating() > 0 ? '+' : '' }}{{ rating() }}
+  </span>
+
+  <button mat-icon-button class="vote-btn downvote" (click)="onVote(-1)" title="Не нравится">
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+</div>

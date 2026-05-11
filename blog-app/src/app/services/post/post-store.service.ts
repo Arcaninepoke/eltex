@@ -4,8 +4,14 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Article} from '../../types/article.interface';
 import {Comment} from '../../types/comment.interface';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class PostStoreService {
+  private isLoadingSubject = new BehaviorSubject<boolean>(false);
+  public readonly isLoading$ = this.isLoadingSubject.asObservable();
+
+  setLoading(value: boolean): void {
+    this.isLoadingSubject.next(value);
+  }
   private postSubject = new BehaviorSubject<Article|null>(null);
   public readonly post$: Observable<Article|null> =
       this.postSubject.asObservable();
@@ -27,5 +33,9 @@ export class PostStoreService {
 
   get comments(): Comment[] {
     return this.commentsSubject.getValue();
+  }
+
+  get isLoading(): boolean {
+    return this.isLoadingSubject.getValue();
   }
 }

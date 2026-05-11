@@ -1,5 +1,7 @@
+import {Category} from './category.interface';
+
 export interface Article {
-  id: number;
+  id: string;
   title: string;
   content: string;
   date: string;
@@ -7,4 +9,7 @@ export interface Article {
   image: string;
   alt: string;
   rating?: number;
+  categoryId?: string;
+  category?: Category;
+  categoryName?: string;
 }

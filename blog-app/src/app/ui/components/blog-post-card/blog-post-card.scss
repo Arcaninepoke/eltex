@@ -29,8 +29,22 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
-  margin: 0;
+  margin-top: auto;
 }
+
+.post-category {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-category-badge);
+    background-color: var(--color-category-badge-bg);
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
 
 .post-title-link {
   text-decoration: none;
@@ -51,7 +65,7 @@
   .action-btn {
     transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
     background: rgba(0, 0, 0, 0.6);
-    color: #ffffff;
+    color: var(--text-light);
     width: 36px;
     height: 36px;
     padding: 6px;
@@ -69,12 +83,12 @@
   }
 
   .edit-btn:hover {
-    color: #42a5f5; 
+    color: var(--color-action-edit); 
     background: rgba(0, 0, 0, 0.8);
   }
 
   .delete-btn:hover {
-    color: #ef5350; 
+    color: var(--color-action-delete); 
     background: rgba(0, 0, 0, 0.8);
   }
 }

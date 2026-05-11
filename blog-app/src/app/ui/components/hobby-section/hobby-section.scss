@@ -12,7 +12,7 @@
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  background-color: #e2e4eb;
+  background-color: var(--bg-placeholder);
 }
 
 .gallery-item img {
@@ -27,7 +27,7 @@
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(26, 30, 39, 0.85);
+  background: var(--overlay-gallery);
   color: var(--text-light);
   display: flex;
   flex-direction: column;

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, input, Output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {MatIconButton} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
@@ -14,8 +14,8 @@ import {Article} from '../../../types/article.interface';
 export class BlogPostCard {
   public article = input.required<Article>();
 
-  @Output() public deleteClick = new EventEmitter<number>();
-  @Output() public editClick = new EventEmitter<Article>();
+  public deleteClick = output<string>();
+  public editClick = output<Article>();
 
   protected onEdit() {
     this.editClick.emit(this.article());

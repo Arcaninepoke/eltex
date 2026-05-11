@@ -1,3 +1,9 @@
+.add-article-wrapper {
+  .section-title {
+    margin-bottom: 24px;
+  }
+}
+
 /*------------------------- ФОРМА ДОБАВЛЕНИЯ СТАТЬИ -------------------------*/
 
 .add-article-section {
@@ -15,10 +21,6 @@
   grid-template-rows: 0fr;
   margin-bottom: 0;
   opacity: 0;
-}
-
-.add-article-wrapper {
-  overflow: hidden;
 }
 
 .admin-form {
@@ -66,59 +68,4 @@
   display: flex;
   gap: 16px;
   margin-top: 10px;
-}
-
-.btn-solid {
-  background-color: var(--accent-primary);
-  color: var(--text-light);
-  border: none;
-  padding: 12px 32px;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.btn-solid:hover {
-  background-color: var(--accent-secondary);
-}
-
-.btn-outline-light {
-  background-color: #ffffff;
-  color: var(--accent-primary);
-  border: 1px solid var(--accent-primary);
-  padding: 12px 32px;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-outline-light:hover {
-  background-color: var(--accent-primary);
-  color: var(--text-light);
-}
-
-.form-group-light input.input-error,
-.form-group-light textarea.input-error {
-  border-color: #ef4444;
-  
-  &:focus {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
-  }
-}
-
-.error-text {
-  color: #ef4444;
-  font-size: 11px;
-  margin-top: -4px;
-}
-
-.btn-solid:disabled {
-  background-color: #9ca3af;
-  cursor: not-allowed;
-  opacity: 0.7;
 }

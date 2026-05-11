@@ -1,0 +1,19 @@
+.comment-card {
+  margin-bottom: 16px;
+
+  .comment-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px 12px;
+
+    .vote-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+  }
+}
+
+.comment-date {
+  color: var(--text-secondary);
+}

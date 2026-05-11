@@ -1,153 +1,3 @@
-/*-------------------------СТИЛИ НЕДАВНИХ СТАТЕЙ-------------------------*/
-
-.post-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  gap: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 40px;
-}
-
-.post-content {
-  padding: 60px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.post-image {
-  background-color: #e2e4eb;
-}
-
-.post-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.post-category {
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.post-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 16px;
-}
-
-/* "Зебра" с использованием переменных */
-.post-card:nth-child(odd) .post-content {
-  background-color: var(--bg-card-odd);
-}
-.post-card:nth-child(odd) .post-category {
-  color: var(--cat-color-odd);
-}
-.post-card:nth-child(even) .post-content {
-  background-color: var(--bg-card-even);
-}
-.post-card:nth-child(even) .post-category {
-  color: var(--accent-secondary);
-}
-
-.all-posts-link {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.btn-outline {
-  display: inline-block;
-  padding: 12px 32px;
-  border: 1px solid var(--accent-secondary);
-  color: var(--accent-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.btn-outline:hover {
-  background-color: var(--accent-secondary);
-  color: var(--text-light);
-}
-
-/*------------------------- ФОРМА ДОБАВЛЕНИЯ СТАТЬИ -------------------------*/
-
-.add-article-section {
-  display: grid;
-  grid-template-rows: 1fr;
-  transition:
-    grid-template-rows 0.4s ease,
-    margin 0.4s ease,
-    opacity 0.4s ease;
-  margin-bottom: 80px;
-  opacity: 1;
-}
-
-.add-article-section.is-hidden {
-  grid-template-rows: 0fr;
-  margin-bottom: 0;
-  opacity: 0;
-}
-
-.add-article-wrapper {
-  overflow: hidden;
-}
-
-.admin-form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.form-group-light {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.form-group-light label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-muted);
-}
-
-.form-group-light input,
-.form-group-light textarea {
-  background-color: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 14px 16px;
-  color: var(--text-main);
-  font-family: "Inter", sans-serif;
-  font-size: 15px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.form-group-light input:focus,
-.form-group-light textarea:focus {
-  border-color: var(--accent-primary);
-}
-
-.form-group-light input::placeholder,
-.form-group-light textarea::placeholder {
-  color: #9ca3af;
-}
-
-.form-actions {
-  display: flex;
-  gap: 16px;
-  margin-top: 10px;
-}
-
 .btn-solid {
   background-color: var(--accent-primary);
   color: var(--text-light);
@@ -165,7 +15,7 @@
 }
 
 .btn-outline-light {
-  background-color: #ffffff;
+  background-color: var(--bg-white);
   color: var(--accent-primary);
   border: 1px solid var(--accent-primary);
   padding: 12px 32px;
@@ -313,13 +163,18 @@
 .admin-form input:disabled,
 .admin-form textarea:disabled {
   background-color: var(--bg-placeholder);
-  color: #9ca3af;
+  color: var(--text-placeholder);
   cursor: not-allowed;
-  border-color: #e5e7eb;
+  border-color: var(--border-disabled);
 }
 
 .form-actions button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.load-more-container {
+  text-align: center;
+  margin-top: 40px;
 }
