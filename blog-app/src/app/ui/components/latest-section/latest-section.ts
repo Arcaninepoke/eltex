@@ -8,10 +8,11 @@ import {ArticlesServiceInterface} from '../../../services/articles/articles-serv
 import {ARTICLE_SERVICE_TOKEN} from '../../../services/articles/articles-service.token';
 import {ArticlesStoreService} from '../../../services/articles/articles-store.service';
 import {Article} from '../../../types/article.interface';
+import {ArticleCard} from '../../components/article-card/article-card';
 
 @Component({
   selector: 'app-latest-section',
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, RouterLink, ArticleCard],
   templateUrl: './latest-section.html',
   styleUrl: './latest-section.scss',
 })
@@ -19,7 +20,7 @@ export class LatestSection implements OnInit {
   latestArticles$: Observable<Article[]>;
 
   constructor(
-      private store: ArticlesStoreService,
+      public store: ArticlesStoreService,
       @Inject(ARTICLE_SERVICE_TOKEN) private articlesService:
           ArticlesServiceInterface) {
     this.latestArticles$ =
@@ -27,6 +28,6 @@ export class LatestSection implements OnInit {
   }
 
   ngOnInit(): void {
-    this.articlesService.getArticles(2).subscribe();
+    this.articlesService.getArticles(2, 1).subscribe();
   }
 }

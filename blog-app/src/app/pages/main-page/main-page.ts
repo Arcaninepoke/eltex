@@ -14,7 +14,7 @@ import {SkillsSection} from '../../ui/components/skills-section/skills-section';
   templateUrl: './main-page.html',
   styleUrl: './main-page.scss',
 })
-export class MainPage {
+export class MainPage implements OnInit {
   constructor(private titleService: Title) {}
 
   ngOnInit() {

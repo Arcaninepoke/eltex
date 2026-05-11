@@ -5,6 +5,7 @@ import {MainPage} from './pages/main-page/main-page';
 import {PostPage} from './pages/post-page/post-page';
 
 export const routes: Routes = [
-  {path: '', component: MainPage}, {path: 'blog', component: BlogPage},
-  {path: 'blog/:id', component: PostPage}
+  {path: '', component: MainPage, title: 'Главная'},
+  {path: 'blog', component: BlogPage, title: 'Блог'},
+  {path: 'blog/:id', component: PostPage},
 ];

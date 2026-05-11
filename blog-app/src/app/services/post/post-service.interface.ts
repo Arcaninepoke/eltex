@@ -9,9 +9,9 @@ export interface PostDataResponse {
 }
 
 export interface PostServiceInterface {
-  getPostData(articleId: number): Observable<PostDataResponse>;
-  addComment(commentData: Partial<Comment>): Observable<Comment[]>;
-  updateCommentRating(commentId: number, rating: number): Observable<Comment[]>;
-  updateArticleRating(articleId: number, rating: number):
-      Observable<Article|null>;
+  getPostData(id: string): Observable<Article|null>;
+  getComments(articleId: string): Observable<Comment[]>;
+  addComment(commentData: Partial<Comment>): Observable<Comment>;
+  updateArticleRating(id: string, direction: 'up'|'down'): Observable<Article>;
+  updateCommentRating(id: string, rating: number): Observable<Comment>;
 }

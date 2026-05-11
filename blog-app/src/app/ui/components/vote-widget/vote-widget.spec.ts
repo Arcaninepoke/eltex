@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StarRating } from './star-rating';
+import { VoteWidget } from './vote-widget';
 
-describe('StarRating', () => {
-  let component: StarRating;
-  let fixture: ComponentFixture<StarRating>;
+describe('VoteWidget', () => {
+  let component: VoteWidget;
+  let fixture: ComponentFixture<VoteWidget>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StarRating],
+      imports: [VoteWidget],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(StarRating);
+    fixture = TestBed.createComponent(VoteWidget);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

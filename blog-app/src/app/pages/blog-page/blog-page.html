@@ -21,12 +21,13 @@
         <h2 class="featured-title">Настройка Rocknix на Anbernic RG35XX H</h2>
         <p class="featured-desc">
           Подробный гайд по установке кастомной прошивки, фиксу проблем со звуком и оптимизации
-          производительности для комфортной игры.
+          производительности.
         </p>
         <p class="post-date">Опубликовано: <time datetime="2025-10-16">16 октября 2025</time></p>
       </div>
     </article>
   </section>
+
   <section class="posts-grid-section">
     <div class="posts-grid">
       @for (item of articles$ | async; track item.id) {
@@ -40,17 +41,22 @@
     </div>
 
     @if ((totalArticles$ | async)! > store.limit) {
-      <div style="text-align: center; margin-top: 40px">
+      <div class="load-more-container">
         <button class="btn-outline-light" (click)="loadMore()">
           Показать еще ({{ (totalArticles$ | async)! - store.limit }})
         </button>
       </div>
     }
   </section>
+
   @if (isFormVisible) {
     <section id="add-article-form-section" class="add-article-section">
+      @if (serverError()) {
+        <app-error-alert [message]="serverError()!"></app-error-alert>
+      }
       <app-article-form
         [editData]="selectedArticle"
+        [categories]="categories"
         (articleSubmit)="onArticleSubmit($event)"
         (cancel)="closeForm()"
       ></app-article-form>

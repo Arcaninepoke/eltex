@@ -15,14 +15,6 @@
   line-height: 1.2;
 }
 
-.post-meta {
-  color: #888;
-  font-size: 0.95rem;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
 .post-image-wrapper {
   margin-bottom: 40px;
   text-align: center;
@@ -71,7 +63,7 @@
 }
 
 .no-comments {
-  color: #888;
+  color: var(--text-muted);
 }
 
 .comments-list {
@@ -81,31 +73,27 @@
   margin-bottom: 40px;
 }
 
-/* Стили для Material Card */
-.comment-card {  
-  .comment-header {
-    margin-bottom: 8px;
-  }
-
-  .comment-author {
-    font-size: 1rem;
-    font-weight: bold;
-  }
-
-  .comment-text {
-    margin: 0;
-    line-height: 1.5;
-    white-space: pre-wrap;
-  }
-
-  .comment-footer {
-    padding: 16px 16px 16px;
-    color: #ffca28;
-    font-size: 0.9rem;
-  }
-}
-
 /* Форма комментариев */
 .comment-form-component {
   display: block;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+
+  .post-date {
+    font-size: 0.95rem;
+  }
+}
+
+.error-container {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--text-muted);
 }

@@ -21,30 +21,35 @@ export class ArticlesService implements ArticlesServiceInterface {
     localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(articles));
   }
 
-  private createResponse(limit: number): ArticlesResponse {
+  private createResponse(limit: number, page: number): ArticlesResponse {
     const allArticles = this.getAllFromStorage();
-    return {articles: allArticles.slice(0, limit), total: allArticles.length};
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+
+    return {
+      articles: allArticles.slice(startIndex, endIndex),
+      total: allArticles.length
+    };
   }
 
-  // пуллим данные
-  getArticles(limit: number): Observable<ArticlesResponse> {
-    // проверяем хранилище перед запросом
-    const storeArticles = this.store.articles;
-    const storeTotal = this.store.totalArticles;
-
-    if (storeArticles.length === limit && storeTotal > 0) {
-      return of({articles: storeArticles, total: storeTotal});
-    }
-    return of(this.createResponse(limit)).pipe(delay(300), tap(response => {
-                                                 this.store.setArticles(
-                                                     response.articles);
-                                                 this.store.setTotalArticles(
-                                                     response.total);
-                                               }));
+  // 1. Получение спискф
+  getArticles(limit: number, page: number): Observable<ArticlesResponse> {
+    return of(this.createResponse(limit, page))
+        .pipe(delay(300), tap(response => {
+                this.store.setArticles(response.articles);
+                this.store.setTotalArticles(response.total);
+              }));
   }
 
-  // добавление статьи
-  addArticle(articleData: any, limit: number): Observable<ArticlesResponse> {
+  // 2. Получение одной статьи
+  getArticleById(id: string): Observable<Article|null> {
+    const allArticles = this.getAllFromStorage();
+    const article = allArticles.find(a => a.id === id) || null;
+    return of(article).pipe(delay(300));
+  }
+
+  // 3. Добавление
+  addArticle(articleData: Partial<Article>|FormData): Observable<Article> {
     const allArticles = this.getAllFromStorage();
     const now = new Date();
     const months = [
@@ -52,60 +57,60 @@ export class ArticlesService implements ArticlesServiceInterface {
       'сентября', 'октября', 'ноября', 'декабря'
     ];
 
+    const title = articleData instanceof FormData ?
+        articleData.get('title') as string :
+        articleData.title;
+    const content = articleData instanceof FormData ?
+        articleData.get('content') as string :
+        articleData.content;
+
     const newArticle: Article = {
-      id: Date.now(),
-      title: articleData.title,
-      content: articleData.content,
+      id: Date.now().toString(),
+      title: title || 'Без заголовка',
+      content: content || '',
       image: 'images/photos/placeholder.jpg',
-      alt: 'Новая статья',
-      date: `${now.getFullYear()}-${
-          String(now.getMonth() + 1).padStart(2, '0')}-${
-          String(now.getDate()).padStart(2, '0')}`,
+      alt: title || 'Новая статья',
+      rating: 0,
+      date: now.toISOString(),
       displayDate:
           `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
     };
 
     allArticles.unshift(newArticle);
     this.saveToStorage(allArticles);
-
-    return of(this.createResponse(limit)).pipe(delay(300), tap(response => {
-                                                 this.store.setArticles(
-                                                     response.articles);
-                                                 this.store.setTotalArticles(
-                                                     response.total);
-                                               }));
+    return of(newArticle).pipe(delay(300));
   }
 
-  // изменение статьи
-  updateArticle(updatedArticle: Article, limit: number):
-      Observable<ArticlesResponse> {
+  // 4. Обновление
+  updateArticle(id: string, articleData: Partial<Article>|FormData):
+      Observable<Article> {
     const allArticles = this.getAllFromStorage();
-    const index = allArticles.findIndex(a => a.id === updatedArticle.id);
+    const index = allArticles.findIndex(a => a.id === id);
 
     if (index !== -1) {
-      allArticles[index] = updatedArticle;
-      this.saveToStorage(allArticles);
-    }
+      const title = articleData instanceof FormData ?
+          articleData.get('title') as string :
+          articleData.title;
+      const content = articleData instanceof FormData ?
+          articleData.get('content') as string :
+          articleData.content;
+      allArticles[index] = {
+        ...allArticles[index],
+        title: title || allArticles[index].title,
+        content: content || allArticles[index].content
+      };
 
-    return of(this.createResponse(limit)).pipe(delay(300), tap(response => {
-                                                 this.store.setArticles(
-                                                     response.articles);
-                                                 this.store.setTotalArticles(
-                                                     response.total);
-                                               }));
+      this.saveToStorage(allArticles);
+      return of(allArticles[index]).pipe(delay(300));
+    }
+    throw new Error('Статья не найдена');
   }
 
-  // удаление статьи
-  deleteArticle(id: number, limit: number): Observable<ArticlesResponse> {
+  // 5. Удаление
+  deleteArticle(id: string): Observable<void> {
     let allArticles = this.getAllFromStorage();
     allArticles = allArticles.filter(a => a.id !== id);
     this.saveToStorage(allArticles);
-
-    return of(this.createResponse(limit)).pipe(delay(300), tap(response => {
-                                                 this.store.setArticles(
-                                                     response.articles);
-                                                 this.store.setTotalArticles(
-                                                     response.total);
-                                               }));
+    return of(undefined).pipe(delay(300));
   }
 }

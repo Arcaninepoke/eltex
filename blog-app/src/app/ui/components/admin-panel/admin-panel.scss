@@ -44,7 +44,7 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(26, 30, 39, 0.6);
+  background-color: var(--overlay-modal);
   z-index: 2000;
   display: flex;
   justify-content: center;
@@ -62,7 +62,7 @@
 }
 
 .stats-modal {
-  background-color: #ffffff;
+  background-color: var(--bg-white);
   border-radius: 12px;
   padding: 30px;
   width: 100%;
@@ -120,8 +120,8 @@
 
 .stat-card {
   flex: 1;
-  background-color: #ffffff;
-  border: 1px solid #f3f4f6;
+  background-color: var(--bg-white);
+  border: 1px solid var(--bg-surface);
   border-radius: 8px;
   padding: 16px;
   display: flex;

@@ -1,41 +1,77 @@
-import {Component, computed, effect, EventEmitter, input, Output} from '@angular/core';
+import {AsyncPipe} from '@angular/common';
+import {Component, computed, effect, input, OnInit, output} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {map, Observable, startWith} from 'rxjs';
 
 import {Article} from '../../../types/article.interface';
+import {Category} from '../../../types/category.interface';
 
 @Component({
   selector: 'app-article-form',
-  standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatAutocompleteModule, AsyncPipe],
   templateUrl: './article-form.html',
   styleUrl: './article-form.scss',
 })
-export class ArticleForm {
+export class ArticleForm implements OnInit {
   public editData = input<Article|null>(null);
+  public categories = input<Category[]>([]);
 
-  @Output() public articleSubmit = new EventEmitter<any>();
-  @Output() public cancel = new EventEmitter<void>();
+  protected selectedFile: File|null = null;
+  protected filteredCategories$!: Observable<Category[]>;
+
+  public articleSubmit = output<{formData: FormData, categoryName: string}>();
+  public cancel = output<void>();
 
   protected form = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(25)]),
+    category: new FormControl('', [Validators.required]),
     content: new FormControl('', [Validators.required])
   });
 
   protected formTitle =
       computed(() => this.editData() ? 'Изменить статью' : 'Создание статьи');
-
   protected saveButtonTitle =
       computed(() => this.editData() ? 'Сохранить' : 'Добавить');
 
   constructor() {
     effect(() => {
       const data = this.editData();
+      const allCategories = this.categories();
+
       if (data) {
-        this.form.patchValue({title: data.title, content: data.content});
+        let categoryNameToSet = '';
+        const categoryId = data.categoryId || data.category?.id;
+
+        if (categoryId && allCategories.length > 0) {
+          const matchedCategory = allCategories.find(c => c.id === categoryId);
+          if (matchedCategory) {
+            categoryNameToSet = matchedCategory.name;
+          }
+        } else if (data.category?.name) {
+          categoryNameToSet = data.category.name;
+        }
+
+        this.form.patchValue({
+          title: data.title,
+          content: data.content,
+          category: categoryNameToSet
+        });
       } else {
         this.form.reset();
       }
     });
+  }
+
+  ngOnInit() {
+    this.filteredCategories$ = this.form.controls.category.valueChanges.pipe(
+        startWith(''), map(value => this._filter(value || '')));
+  }
+
+  private _filter(value: string): Category[] {
+    const filterValue = value.toLowerCase();
+    return this.categories().filter(
+        category => category.name.toLowerCase().includes(filterValue));
   }
 
   protected hasError(controlName: string): boolean {
@@ -66,11 +102,28 @@ export class ArticleForm {
     }
   }
 
+  protected onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) this.selectedFile = file;
+  }
+
   protected onSubmit() {
     if (this.form.invalid) return;
-    this.articleSubmit.emit({...this.form.value, id: this.editData()?.id});
 
-    this.form.reset();
+    const formData = new FormData();
+    formData.append('title', this.form.value.title!);
+    formData.append('content', this.form.value.content!);
+
+    if (this.editData()?.id) {
+      formData.append('id', String(this.editData()!.id));
+    }
+
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
+    this.articleSubmit.emit(
+        {formData: formData, categoryName: this.form.value.category!.trim()});
   }
 
   protected onCancel() {

@@ -1,8 +1,12 @@
 <header class="main-header">
   <nav class="navbar">
-    <a href="index.html" class="logo">
-      <img src="images/icons/arcanine.png" />
-    </a>
+    <a
+      class="logo"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ><img src="images/icons/arcanine.png"
+    /></a>
 
     <div class="nav-links">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"

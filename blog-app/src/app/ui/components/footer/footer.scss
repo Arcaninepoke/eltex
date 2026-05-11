@@ -56,7 +56,7 @@
 
 .copyright {
   font-size: 14px;
-  color: #9ca3af;
+  color: var(--text-placeholder);
   margin: 0;
 }
 
@@ -81,7 +81,7 @@
 .contact-form input,
 .contact-form textarea {
   background-color: transparent;
-  border: 1px solid #4b5563;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 14px 16px;
   color: var(--text-light);
@@ -103,7 +103,7 @@
 
 .btn-submit {
   align-self: flex-start;
-  background-color: #55c566;
+  background-color: var(--color-vote-positive);
   color: var(--text-light);
   border: none;
   padding: 12px 32px;

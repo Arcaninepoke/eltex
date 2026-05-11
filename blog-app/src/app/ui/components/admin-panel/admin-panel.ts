@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, input, output} from '@angular/core';
 
 @Component({
   selector: 'app-admin-panel',
@@ -7,8 +7,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrl: './admin-panel.scss',
 })
 export class AdminPanel {
-  @Output() addClick = new EventEmitter<void>();
-  @Input() articleCount: number = 0;
+  public addClick = output<void>();
+  public articleCount = input<number>(0);
   isStatsModalOpen = false;
 
   onAddClick() {

@@ -8,9 +8,4 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
   styleUrl: './header.scss',
 })
 export class Header {
-  protected title = 'Title';
-  protected link = {
-    name: 'Mock Link',
-    href: '#',
-  }
 }

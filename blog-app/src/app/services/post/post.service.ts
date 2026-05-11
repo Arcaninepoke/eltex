@@ -13,36 +13,36 @@ import {PostStoreService} from './post-store.service';
 export class PostService implements PostServiceInterface {
   constructor(private store: PostStoreService) {}
 
-  private getArticles(): Article[] {
+  private getArticlesFromStorage(): Article[] {
     const data = localStorage.getItem(STORAGE_KEYS.ARTICLES);
     return data ? JSON.parse(data) : [];
   }
 
-  private getComments(): Comment[] {
+  private getCommentsFromStorage(): Comment[] {
     const data = localStorage.getItem(STORAGE_KEYS.COMMENTS);
     return data ? JSON.parse(data) : [];
   }
 
-  getPostData(articleId: number): Observable<PostDataResponse> {
-    const articles = this.getArticles();
-    const post = articles.find(a => a.id === articleId) || null;
+  getPostData(id: string): Observable<Article|null> {
+    const articles = this.getArticlesFromStorage();
+    const post = articles.find(a => a.id === id) || null;
 
-    const allComments = this.getComments();
-    const postComments = allComments.filter(c => c.articleId === articleId);
-
-    const response: PostDataResponse = {post, comments: postComments};
-
-    return of(response).pipe(delay(1000), tap(res => {
-                               this.store.setPost(res.post);
-                               this.store.setComments(res.comments);
-                             }));
+    return of(post).pipe(delay(300), tap(res => this.store.setPost(res)));
   }
 
-  addComment(commentData: Partial<Comment>): Observable<Comment[]> {
-    const allComments = this.getComments();
+  getComments(articleId: string): Observable<Comment[]> {
+    const allComments = this.getCommentsFromStorage();
+    const postComments = allComments.filter(c => c.articleId === articleId);
+
+    return of(postComments)
+        .pipe(delay(300), tap(res => this.store.setComments(res)));
+  }
+
+  addComment(commentData: Partial<Comment>): Observable<Comment> {
+    const allComments = this.getCommentsFromStorage();
     const now = new Date();
     const newComment: Comment = {
-      id: Date.now(),
+      id: Date.now().toString(),
       articleId: commentData.articleId!,
       author: commentData.author!,
       text: commentData.text!,
@@ -54,41 +54,34 @@ export class PostService implements PostServiceInterface {
 
     allComments.push(newComment);
     localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(allComments));
-    const postComments =
-        allComments.filter(c => c.articleId === commentData.articleId);
 
-    return of(postComments)
-        .pipe(delay(1000), tap(comments => this.store.setComments(comments)));
+    return of(newComment).pipe(delay(300));
   }
 
-  updateArticleRating(articleId: number, rating: number):
-      Observable<Article|null> {
-    const articles = this.getArticles();
-    const articleIndex = articles.findIndex(a => a.id === articleId);
+  updateArticleRating(id: string, direction: 'up'|'down'): Observable<Article> {
+    const articles = this.getArticlesFromStorage();
+    const articleIndex = articles.findIndex(a => a.id === id);
 
     if (articleIndex !== -1) {
-      articles[articleIndex].rating = rating;
+      const currentRating = articles[articleIndex].rating || 0;
+      articles[articleIndex].rating =
+          direction === 'up' ? currentRating + 1 : currentRating - 1;
+
       localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(articles));
-      this.store.setPost(articles[articleIndex]);
-      return of(articles[articleIndex]);
+      return of(articles[articleIndex]).pipe(delay(300));
     }
-    return of(null);
+    throw new Error('Статья не найдена');
   }
 
-  updateCommentRating(commentId: number, rating: number):
-      Observable<Comment[]> {
-    const allComments = this.getComments();
-    const commentIndex = allComments.findIndex(c => c.id === commentId);
+  updateCommentRating(id: string, rating: number): Observable<Comment> {
+    const allComments = this.getCommentsFromStorage();
+    const commentIndex = allComments.findIndex(c => c.id === id);
 
     if (commentIndex !== -1) {
       allComments[commentIndex].rating = rating;
       localStorage.setItem(STORAGE_KEYS.COMMENTS, JSON.stringify(allComments));
-      const currentArticleId = allComments[commentIndex].articleId;
-      const postComments =
-          allComments.filter(c => c.articleId === currentArticleId);
-      this.store.setComments(postComments);
-      return of(postComments);
+      return of(allComments[commentIndex]).pipe(delay(300));
     }
-    return of([]);
+    throw new Error('Комментарий не найден');
   }
 }
