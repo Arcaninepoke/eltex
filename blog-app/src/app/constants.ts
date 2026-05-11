@@ -1,4 +1,5 @@
 export const STORAGE_KEYS = {
   ARTICLES: 'my_blog_articles',
-  COMMENTS: 'my_blog_comments'
+  COMMENTS: 'my_blog_comments',
+  CATEGORIES: 'categories',
 };
