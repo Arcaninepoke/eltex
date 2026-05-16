@@ -7,6 +7,7 @@ import {CategoriesApiService} from '../../services/api/categories-api.service';
 import {ArticlesServiceInterface} from '../../services/articles/articles-service.interface';
 import {ARTICLE_SERVICE_TOKEN} from '../../services/articles/articles-service.token';
 import {ArticlesStoreService} from '../../services/articles/articles-store.service';
+import {ArticleSubmitData} from '../../types/article-submit-data.interface';
 import {Article} from '../../types/article.interface';
 import {Category} from '../../types/category.interface';
 import {AdminPanel} from '../../ui/components/admin-panel/admin-panel';
@@ -55,16 +56,17 @@ export class BlogPage implements OnInit {
   }
 
   private loadArticles() {
-    this.articlesService.getArticles(this.store.limit, 1).subscribe();
+    this.articlesService.getArticles(this.store.limit, this.store.page)
+        .subscribe();
   }
 
   protected loadMore() {
-    const newLimit = this.store.limit + 6;
-    this.store.setLimit(newLimit);
+    const newPage = this.store.page + 1;
+    this.store.setPage(newPage);
     this.loadArticles();
   }
 
-  protected onArticleSubmit(event: {formData: FormData; categoryName: string}) {
+  protected onArticleSubmit(event: ArticleSubmitData) {
     const {formData, categoryName} = event;
     this.serverError.set(null);
 

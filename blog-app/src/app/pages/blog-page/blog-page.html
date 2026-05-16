@@ -40,11 +40,9 @@
       }
     </div>
 
-    @if ((totalArticles$ | async)! > store.limit) {
+    @if ((totalArticles$ | async)! > store.page * store.limit) {
       <div class="load-more-container">
-        <button class="btn-outline-light" (click)="loadMore()">
-          Показать еще ({{ (totalArticles$ | async)! - store.limit }})
-        </button>
+        <button class="btn-outline-light" (click)="loadMore()">Показать еще</button>
       </div>
     }
   </section>

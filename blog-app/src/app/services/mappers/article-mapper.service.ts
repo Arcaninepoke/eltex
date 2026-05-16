@@ -14,8 +14,7 @@ export class ArticleMapperService {
       content: dto.content,
       rating: dto.rating,
       categoryId: dto.categoryId || dto.category?.id || undefined,
-      image: dto.imgSrc ? `http://localhost:3000${dto.imgSrc}` :
-                          'images/photos/placeholder.jpg',
+      image: dto.imgSrc ?? 'images/photos/placeholder.jpg',
       alt: dto.title,
       date: dateObj.toISOString(),
       displayDate: this.formatDate(dateObj)
