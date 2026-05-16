@@ -21,7 +21,7 @@ export class ArticlesApiHttpService implements ArticlesServiceInterface {
     const params = new HttpParams()
                        .set('limit', limit.toString())
                        .set('page', page.toString())
-                       .set('cumulative', 'false');
+                       .set('cumulative', 'true');
 
     return this.http.get<any>(this.apiUrl, {params})
         .pipe(

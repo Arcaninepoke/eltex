@@ -11,6 +11,7 @@ export class ArticlesStoreService {
   private articlesSubject = new BehaviorSubject<Article[]>([]);
   private totalArticlesSubject = new BehaviorSubject<number>(0);
   private limitSubject = new BehaviorSubject<number>(6);
+  private pageSubject = new BehaviorSubject<number>(1);
 
   private rawArticles$ = this.articlesSubject.asObservable();
 
@@ -27,6 +28,7 @@ export class ArticlesStoreService {
 
   public totalArticles$ = this.totalArticlesSubject.asObservable();
   public limit$ = this.limitSubject.asObservable();
+  public page$ = this.pageSubject.asObservable();
 
   setArticles(articles: Article[]): void {
     this.articlesSubject.next(articles);
@@ -37,6 +39,9 @@ export class ArticlesStoreService {
   setLimit(limit: number): void {
     this.limitSubject.next(limit);
   }
+  setPage(page: number): void {
+    this.pageSubject.next(page);
+  }
 
   get articles(): Article[] {
     return this.articlesSubject.getValue();
@@ -46,5 +51,8 @@ export class ArticlesStoreService {
   }
   get limit(): number {
     return this.limitSubject.getValue();
+  }
+  get page(): number {
+    return this.pageSubject.getValue();
   }
 }

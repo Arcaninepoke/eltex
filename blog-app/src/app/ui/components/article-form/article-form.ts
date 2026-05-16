@@ -4,6 +4,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {map, Observable, startWith} from 'rxjs';
 
+import {ArticleSubmitData} from '../../../types/article-submit-data.interface';
 import {Article} from '../../../types/article.interface';
 import {Category} from '../../../types/category.interface';
 
@@ -20,7 +21,7 @@ export class ArticleForm implements OnInit {
   protected selectedFile: File|null = null;
   protected filteredCategories$!: Observable<Category[]>;
 
-  public articleSubmit = output<{formData: FormData, categoryName: string}>();
+  public articleSubmit = output<ArticleSubmitData>();
   public cancel = output<void>();
 
   protected form = new FormGroup({

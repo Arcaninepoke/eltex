@@ -4,5 +4,10 @@ module.exports = {
     'secure' : false,
     'changeOrigin' : true,
     'pathRewrite' : {'^/api' : ''}
+  },
+  '/update' : {
+    'target' : 'http://localhost:3000',
+    'secure' : false,
+    'changeOrigin' : true
   }
 };
